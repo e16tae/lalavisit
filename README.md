@@ -162,6 +162,12 @@ lalavisit/
 ├── public/                      # 정적 파일
 │   ├── activities/
 │   └── logo.svg
+├── scripts/                     # 배포 스크립트
+│   ├── deploy.sh                # 통합 배포 스크립트
+│   ├── deploy-manual.sh         # 수동 배포
+│   ├── deploy-argocd.sh         # ArgoCD 배포
+│   ├── setup-ingress.sh         # Ingress Controller 설치
+│   └── setup-cert-manager.sh    # cert-manager 설치
 ├── Dockerfile                   # Multi-stage Docker build
 ├── .dockerignore
 ├── DEPLOYMENT.md                # K8s 배포 가이드
@@ -182,6 +188,35 @@ K8s 클러스터에 배포하는 방법은 [DEPLOYMENT.md](./DEPLOYMENT.md)를 �
 
 ### 빠른 시작
 
+#### 옵션 1: 통합 배포 스크립트 (권장)
+
+```bash
+# 모든 작업을 대화형으로 진행
+./scripts/deploy.sh
+```
+
+선택 가능한 배포 방식:
+- **수동 배포**: kubectl로 직접 배포
+- **ArgoCD 배포**: GitOps 자동 배포
+- **인프라 설정**: Ingress + cert-manager만 설치
+- **전체 설정**: 인프라 + 배포 한번에
+
+#### 옵션 2: 단계별 배포
+
+```bash
+# 1. 인프라 설정
+./scripts/setup-ingress.sh        # Nginx Ingress Controller
+./scripts/setup-cert-manager.sh   # SSL 인증서 관리
+
+# 2-A. 수동 배포
+./scripts/deploy-manual.sh
+
+# 또는 2-B. ArgoCD 배포
+./scripts/deploy-argocd.sh
+```
+
+### CI/CD 파이프라인
+
 1. **GitHub 저장소 push**
    ```bash
    git push origin main
@@ -190,11 +225,11 @@ K8s 클러스터에 배포하는 방법은 [DEPLOYMENT.md](./DEPLOYMENT.md)를 �
 2. **GitHub Actions 자동 실행**
    - 빌드 및 테스트
    - Docker 이미지 생성
-   - GHCR에 이미지 push
+   - GHCR에 이미지 push (`ghcr.io/e16tae/lalavisit`)
 
-3. **ArgoCD 자동 배포**
-   - K8s 매니페스트 동기화
-   - 자동으로 클러스터에 배포
+3. **배포** (선택한 방식에 따라)
+   - 수동: kubectl apply로 배포
+   - ArgoCD: Git 변경사항 자동 감지 및 배포
 
 ## 📊 빌드 정보
 
