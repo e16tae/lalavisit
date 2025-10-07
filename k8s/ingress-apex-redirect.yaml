@@ -1,0 +1,47 @@
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: redirect-to-www
+  namespace: lalavisit
+plugin: pre-function
+config:
+  access:
+  - |
+    -- Redirect apex domain to www subdomain
+    local scheme = kong.request.get_scheme()
+    local host = kong.request.get_header("host")
+    local path = kong.request.get_path_with_query()
+
+    if host == "lalavisit.com" then
+      local redirect_url = "https://www.lalavisit.com" .. path
+      kong.response.set_header("Location", redirect_url)
+      return kong.response.exit(301, "Moved Permanently to www subdomain")
+    end
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lalavisit-apex-redirect
+  namespace: lalavisit
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    konghq.com/plugins: redirect-to-www
+    konghq.com/protocols: "https"
+    konghq.com/https-redirect-status-code: "301"
+spec:
+  ingressClassName: kong
+  tls:
+  - hosts:
+    - lalavisit.com
+    secretName: lalavisit-apex-tls
+  rules:
+  - host: lalavisit.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: lalavisit-web
+            port:
+              number: 80

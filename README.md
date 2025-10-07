@@ -188,6 +188,27 @@ K8s 클러스터에 배포하는 방법은 [DEPLOYMENT.md](./DEPLOYMENT.md)를 �
 
 ### 빠른 시작
 
+#### 환경변수 설정 (선택사항)
+
+배포 시 민감한 정보를 입력하지 않으려면 환경변수를 사용하세요:
+
+```bash
+# 1. 환경변수 파일 생성
+cp .env.deploy.example .env.deploy
+
+# 2. 값 수정
+nano .env.deploy
+
+# 3. 환경변수 로드
+source .env.deploy
+```
+
+지원하는 환경변수:
+- `EMAIL_USER`, `EMAIL_PASSWORD` - 이메일 설정
+- `SMTP_HOST`, `SMTP_PORT` - SMTP 설정
+- `GITHUB_USER`, `GITHUB_PAT` - GHCR private 저장소용
+- `SITE_URL`, `KAKAO_CHANNEL_URL` - 사이트 설정
+
 #### 옵션 1: 통합 배포 스크립트 (권장)
 
 ```bash

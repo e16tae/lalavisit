@@ -43,27 +43,60 @@ fi
 
 if ! kubectl get secret lalavisit-secrets -n lalavisit &> /dev/null; then
     echo ""
-    echo "환경 변수를 입력하세요:"
-    read -p "EMAIL_USER [lalavisit@naver.com]: " EMAIL_USER
-    EMAIL_USER=${EMAIL_USER:-lalavisit@naver.com}
-
-    read -sp "EMAIL_PASSWORD: " EMAIL_PASSWORD
+    echo "환경 변수를 설정합니다..."
+    echo "(환경 변수가 있으면 자동으로 사용됩니다)"
     echo ""
 
-    read -p "SMTP_HOST [smtp.naver.com]: " SMTP_HOST
-    SMTP_HOST=${SMTP_HOST:-smtp.naver.com}
+    # 환경변수 우선, 없으면 프롬프트
+    if [ -z "$EMAIL_USER" ]; then
+        read -p "EMAIL_USER [lalavisit@naver.com]: " EMAIL_USER
+        EMAIL_USER=${EMAIL_USER:-lalavisit@naver.com}
+    else
+        echo "EMAIL_USER: $EMAIL_USER (환경변수)"
+    fi
 
-    read -p "SMTP_PORT [587]: " SMTP_PORT
-    SMTP_PORT=${SMTP_PORT:-587}
+    if [ -z "$EMAIL_PASSWORD" ]; then
+        read -sp "EMAIL_PASSWORD: " EMAIL_PASSWORD
+        echo ""
+    else
+        echo "EMAIL_PASSWORD: ******* (환경변수)"
+    fi
 
-    read -p "CONTACT_EMAIL [lalavisit@naver.com]: " CONTACT_EMAIL
-    CONTACT_EMAIL=${CONTACT_EMAIL:-lalavisit@naver.com}
+    if [ -z "$SMTP_HOST" ]; then
+        read -p "SMTP_HOST [smtp.naver.com]: " SMTP_HOST
+        SMTP_HOST=${SMTP_HOST:-smtp.naver.com}
+    else
+        echo "SMTP_HOST: $SMTP_HOST (환경변수)"
+    fi
 
-    read -p "SITE_URL [https://www.lalavisit.com]: " SITE_URL
-    SITE_URL=${SITE_URL:-https://www.lalavisit.com}
+    if [ -z "$SMTP_PORT" ]; then
+        read -p "SMTP_PORT [587]: " SMTP_PORT
+        SMTP_PORT=${SMTP_PORT:-587}
+    else
+        echo "SMTP_PORT: $SMTP_PORT (환경변수)"
+    fi
 
-    read -p "KAKAO_CHANNEL_URL [https://pf.kakao.com/_xnxoxoxG/chat]: " KAKAO_URL
-    KAKAO_URL=${KAKAO_URL:-https://pf.kakao.com/_xnxoxoxG/chat}
+    if [ -z "$CONTACT_EMAIL" ]; then
+        read -p "CONTACT_EMAIL [lalavisit@naver.com]: " CONTACT_EMAIL
+        CONTACT_EMAIL=${CONTACT_EMAIL:-lalavisit@naver.com}
+    else
+        echo "CONTACT_EMAIL: $CONTACT_EMAIL (환경변수)"
+    fi
+
+    if [ -z "$SITE_URL" ]; then
+        read -p "SITE_URL [https://www.lalavisit.com]: " SITE_URL
+        SITE_URL=${SITE_URL:-https://www.lalavisit.com}
+    else
+        echo "SITE_URL: $SITE_URL (환경변수)"
+    fi
+
+    if [ -z "$KAKAO_CHANNEL_URL" ]; then
+        read -p "KAKAO_CHANNEL_URL [https://pf.kakao.com/_xnxoxoxG/chat]: " KAKAO_URL
+        KAKAO_URL=${KAKAO_URL:-https://pf.kakao.com/_xnxoxoxG/chat}
+    else
+        KAKAO_URL=$KAKAO_CHANNEL_URL
+        echo "KAKAO_CHANNEL_URL: $KAKAO_URL (환경변수)"
+    fi
 
     echo ""
     echo "Secret을 생성합니다..."
@@ -89,14 +122,9 @@ echo -e "${YELLOW}[Step 2] GHCR 접근 권한 설정${NC}"
 
 # GHCR이 public이 아닌 경우 ImagePullSecret 필요
 if ! kubectl get secret ghcr-secret -n lalavisit &> /dev/null; then
-    read -p "GHCR 저장소가 private입니까? (y/N): " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        read -p "GitHub Username [e16tae]: " GITHUB_USER
-        GITHUB_USER=${GITHUB_USER:-e16tae}
-
-        read -sp "GitHub Personal Access Token (packages 권한 필요): " GITHUB_PAT
-        echo ""
+    # 환경변수로 GITHUB_USER와 GITHUB_PAT이 설정되어 있으면 자동으로 생성
+    if [ -n "$GITHUB_USER" ] && [ -n "$GITHUB_PAT" ]; then
+        echo "GHCR ImagePullSecret을 생성합니다... (환경변수 사용)"
 
         kubectl create secret docker-registry ghcr-secret \
             --docker-server=ghcr.io \
@@ -105,6 +133,27 @@ if ! kubectl get secret ghcr-secret -n lalavisit &> /dev/null; then
             --namespace=lalavisit
 
         echo -e "${GREEN}✓ ImagePullSecret 생성 완료${NC}"
+    else
+        read -p "GHCR 저장소가 private입니까? (y/N): " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            read -p "GitHub Username [e16tae]: " GITHUB_USER
+            GITHUB_USER=${GITHUB_USER:-e16tae}
+
+            read -sp "GitHub Personal Access Token (packages 권한 필요): " GITHUB_PAT
+            echo ""
+
+            kubectl create secret docker-registry ghcr-secret \
+                --docker-server=ghcr.io \
+                --docker-username="$GITHUB_USER" \
+                --docker-password="$GITHUB_PAT" \
+                --namespace=lalavisit
+
+            echo -e "${GREEN}✓ ImagePullSecret 생성 완료${NC}"
+        else
+            echo "Public 저장소로 진행합니다."
+        fi
+    fi
 
         # deployment.yaml에 imagePullSecrets 추가 필요 알림
         echo -e "${YELLOW}주의: ../k8s/deployment.yaml에 다음 내용을 추가해야 합니다:${NC}"
@@ -135,6 +184,10 @@ kubectl apply -f ../k8s/service.yaml
 # Ingress
 echo "Ingress 생성..."
 kubectl apply -f ../k8s/ingress.yaml
+
+# Apex domain redirect
+echo "Apex domain redirect 설정..."
+kubectl apply -f ../k8s/ingress-apex-redirect.yaml
 
 echo -e "${GREEN}✓ 모든 리소스 배포 완료${NC}"
 
