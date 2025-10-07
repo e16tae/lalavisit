@@ -69,22 +69,33 @@ echo "이 비밀번호를 복사해두세요. 첫 로그인 후 변경할 수 �
 echo ""
 
 # ArgoCD UI 접속 방법 안내
-echo -e "${YELLOW}[Step 3] ArgoCD 웹 UI 접속 방법${NC}"
+echo -e "${YELLOW}[Step 3] ArgoCD 웹 UI 접속 설정${NC}"
 echo ""
-echo "Option 1: Port Forwarding (로컬에서 접속)"
-echo "  kubectl port-forward svc/argocd-server -n argocd 8080:443"
-echo "  브라우저에서 https://localhost:8080 접속"
+echo "ArgoCD 접속 방법을 선택하세요:"
+echo "  1) Ingress (도메인: argocd.deuseda.com)"
+echo "  2) Port Forwarding (로컬: https://localhost:8080)"
+echo "  3) 나중에 설정"
 echo ""
-echo "Option 2: LoadBalancer (외부 접속)"
-echo "  kubectl patch svc argocd-server -n argocd -p '{\"spec\": {\"type\": \"LoadBalancer\"}}'"
+read -p "선택 (1-3): " -n 1 -r ACCESS_CHOICE
 echo ""
-echo "Option 3: Ingress (도메인 연결)"
-echo "  별도 Ingress 설정 필요 (argocd-ingress.yaml)"
 echo ""
 
-read -p "Port Forwarding을 지금 시작하시겠습니까? (y/N): " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
+if [ "$ACCESS_CHOICE" = "1" ]; then
+    echo -e "${GREEN}ArgoCD Ingress를 생성합니다...${NC}"
+    kubectl apply -f ../k8s/argocd-ingress.yaml
+
+    echo -e "${GREEN}✓ ArgoCD Ingress 생성 완료${NC}"
+    echo ""
+    echo -e "${BLUE}ArgoCD 접속 정보:${NC}"
+    echo "  URL: https://argocd.deuseda.com"
+    echo "  Username: admin"
+    echo "  Password: $ARGOCD_PASSWORD"
+    echo ""
+    echo -e "${YELLOW}주의: DNS 설정이 필요합니다.${NC}"
+    echo "  argocd.deuseda.com을 Kong LoadBalancer IP로 A 레코드 추가"
+    echo ""
+
+elif [ "$ACCESS_CHOICE" = "2" ]; then
     echo ""
     echo -e "${GREEN}Port Forwarding을 시작합니다...${NC}"
     echo "ArgoCD UI: https://localhost:8080"
@@ -95,6 +106,10 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo ""
     kubectl port-forward svc/argocd-server -n argocd 8080:443
     exit 0
+else
+    echo "나중에 다음 명령어로 Ingress를 생성할 수 있습니다:"
+    echo "  kubectl apply -f k8s/argocd-ingress.yaml"
+    echo ""
 fi
 
 echo ""
@@ -131,7 +146,7 @@ else
     echo "Secret을 생성합니다..."
 
     # Namespace 먼저 생성
-    kubectl apply -f k8s/namespace.yaml
+    kubectl apply -f ../k8s/namespace.yaml
 
     kubectl create secret generic lalavisit-secrets \
         --namespace=lalavisit \
@@ -150,7 +165,7 @@ echo ""
 echo -e "${YELLOW}[Step 5] ArgoCD Application 생성${NC}"
 
 # ArgoCD Application 배포
-kubectl apply -f argocd/application.yaml
+kubectl apply -f ../argocd/application.yaml
 
 echo -e "${GREEN}✓ ArgoCD Application 생성 완료${NC}"
 

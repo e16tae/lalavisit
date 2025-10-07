@@ -69,7 +69,7 @@ if ! kubectl get secret lalavisit-secrets -n lalavisit &> /dev/null; then
     echo "Secret을 생성합니다..."
 
     # Namespace 먼저 생성
-    kubectl apply -f k8s/namespace.yaml
+    kubectl apply -f ../k8s/namespace.yaml
 
     kubectl create secret generic lalavisit-secrets \
         --namespace=lalavisit \
@@ -107,7 +107,7 @@ if ! kubectl get secret ghcr-secret -n lalavisit &> /dev/null; then
         echo -e "${GREEN}✓ ImagePullSecret 생성 완료${NC}"
 
         # deployment.yaml에 imagePullSecrets 추가 필요 알림
-        echo -e "${YELLOW}주의: k8s/deployment.yaml에 다음 내용을 추가해야 합니다:${NC}"
+        echo -e "${YELLOW}주의: ../k8s/deployment.yaml에 다음 내용을 추가해야 합니다:${NC}"
         echo "  spec.template.spec.imagePullSecrets:"
         echo "  - name: ghcr-secret"
     else
@@ -122,19 +122,19 @@ echo -e "${YELLOW}[Step 3] K8s 리소스 배포${NC}"
 
 # Namespace
 echo "Namespace 생성..."
-kubectl apply -f k8s/namespace.yaml
+kubectl apply -f ../k8s/namespace.yaml
 
 # Deployment
 echo "Deployment 생성..."
-kubectl apply -f k8s/deployment.yaml
+kubectl apply -f ../k8s/deployment.yaml
 
 # Service
 echo "Service 생성..."
-kubectl apply -f k8s/service.yaml
+kubectl apply -f ../k8s/service.yaml
 
 # Ingress
 echo "Ingress 생성..."
-kubectl apply -f k8s/ingress.yaml
+kubectl apply -f ../k8s/ingress.yaml
 
 echo -e "${GREEN}✓ 모든 리소스 배포 완료${NC}"
 
