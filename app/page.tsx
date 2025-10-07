@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Heart, Users, Home, ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
-import { ReviewsSection } from "@/components/reviews-section";
 
 export const metadata: Metadata = {
   title: "라라재가방문요양센터 - 믿을 수 있는 전문 요양 서비스",
@@ -109,9 +108,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Reviews Section */}
-      <ReviewsSection />
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-primary to-secondary text-white">

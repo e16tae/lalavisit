@@ -107,6 +107,12 @@ export default function ContactPage() {
                   </a>
                 </div>
                 <div>
+                  <p className="text-sm text-gray-600 mb-1">팩스</p>
+                  <span className="text-lg font-semibold text-primary">
+                    02-430-2352
+                  </span>
+                </div>
+                <div>
                   <p className="text-sm text-gray-600 mb-1">센터장</p>
                   <a
                     href="tel:010-9573-2351"

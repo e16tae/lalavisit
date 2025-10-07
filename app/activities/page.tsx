@@ -150,22 +150,6 @@ export default function ActivitiesPage() {
           )}
         </div>
       </section>
-
-      {/* Info Section */}
-      <section className="py-12 bg-gradient-to-r from-primary/5 to-secondary/5">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl font-bold mb-4">활동 사진 업로드</h2>
-            <p className="text-gray-700 mb-2">
-              활동 사진과 메타데이터는 <code className="bg-white px-2 py-1 rounded">data/activities.json</code> 파일에서 관리됩니다.
-            </p>
-            <p className="text-gray-600">
-              사진 파일은 <code className="bg-white px-2 py-1 rounded">public/activities/</code> 폴더에 저장하고,
-              메타데이터를 JSON 파일에 추가하면 자동으로 표시됩니다.
-            </p>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

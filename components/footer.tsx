@@ -32,6 +32,7 @@ export function Footer() {
             <h3 className="font-semibold text-gray-900 mb-4">연락처</h3>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>센터: 02-430-2351</li>
+              <li>팩스: 02-430-2352</li>
               <li>센터장: 010-9573-2351</li>
               <li>이메일: lalavisit@naver.com</li>
             </ul>
