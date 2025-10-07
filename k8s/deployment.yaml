@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: ghcr.io/e16tae/lalavisit:latest
+        image: ghcr.io/e16tae/lalavisit:78fe61f862e12c35bf16ba98fbb905625b0be503
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
