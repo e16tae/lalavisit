@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/<YOUR_USERNAME>/lalavisit.git
+    repoURL: https://github.com/e16tae/lalavisit.git
     targetRevision: HEAD
     path: k8s
   destination:

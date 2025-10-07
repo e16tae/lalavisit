@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: <YOUR_REGISTRY>/lalavisit:latest
+        image: ghcr.io/e16tae/lalavisit:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
