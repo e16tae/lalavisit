@@ -124,7 +124,7 @@ export default function AboutPage() {
               <div className="aspect-video relative">
                 {/* 네이버 지도 임베드 영역 */}
                 <iframe
-                  src="https://map.naver.com/p/entry/place/YOUR_PLACE_ID?c=15.00,0,0,0,dh"
+                  src="https://map.naver.com/p/entry/place/2004738980?c=15.00,0,0,0,dh"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
