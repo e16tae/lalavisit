@@ -120,7 +120,7 @@ spec:
     solvers:
     - http01:
         ingress:
-          class: nginx
+          class: kong
 EOF
 
 echo ""
@@ -144,7 +144,7 @@ spec:
     solvers:
     - http01:
         ingress:
-          class: nginx
+          class: kong
 EOF
 
 echo -e "${GREEN}✓ Staging ClusterIssuer 생성 완료${NC}"
