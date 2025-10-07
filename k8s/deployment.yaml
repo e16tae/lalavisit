@@ -19,7 +19,7 @@ spec:
       - name: ghcr-secret
       containers:
       - name: web
-        image: ghcr.io/e16tae/lalavisit:9098e9ea69224cab2a0684881d4e6570182e3680
+        image: ghcr.io/e16tae/lalavisit:fb2f73af76d40ae4df49e7d98a0f040eb7c7fd22
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
