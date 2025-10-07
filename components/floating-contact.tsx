@@ -21,15 +21,16 @@ export function FloatingContact() {
               <Phone className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
               <span className="text-sm font-medium">전화상담</span>
             </a>
-            <a
-              href={kakaoChannelUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-[#FEE500] px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all group"
+            <button
+              onClick={() => alert('카카오톡 채널은 현재 준비중입니다.\n빠른 시일 내에 오픈하겠습니다.')}
+              className="flex items-center gap-2 bg-gray-100 px-4 py-3 rounded-full shadow-lg cursor-not-allowed border border-gray-300 relative"
             >
-              <KakaoIcon className="w-5 h-5 text-[#3C1E1E] group-hover:scale-110 transition-transform" />
-              <span className="text-sm font-medium text-[#3C1E1E]">카카오톡</span>
-            </a>
+              <KakaoIcon className="w-5 h-5 text-gray-400" />
+              <span className="text-sm font-medium text-gray-500">카카오톡</span>
+              <span className="absolute -top-1 -right-1 bg-yellow-400 text-xs px-2 py-0.5 rounded-full text-gray-800 font-semibold">
+                준비중
+              </span>
+            </button>
             <a
               href="mailto:lalavisit@naver.com"
               className="flex items-center gap-2 bg-white px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all border border-gray-200 group"
