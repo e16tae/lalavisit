@@ -154,14 +154,6 @@ if ! kubectl get secret ghcr-secret -n lalavisit &> /dev/null; then
             echo "Public 저장소로 진행합니다."
         fi
     fi
-
-        # deployment.yaml에 imagePullSecrets 추가 필요 알림
-        echo -e "${YELLOW}주의: ../k8s/deployment.yaml에 다음 내용을 추가해야 합니다:${NC}"
-        echo "  spec.template.spec.imagePullSecrets:"
-        echo "  - name: ghcr-secret"
-    else
-        echo "Public 저장소로 진행합니다."
-    fi
 else
     echo -e "${GREEN}✓ ImagePullSecret이 이미 존재합니다.${NC}"
 fi

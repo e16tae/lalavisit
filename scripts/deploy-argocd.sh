@@ -120,27 +120,60 @@ if kubectl get secret lalavisit-secrets -n lalavisit &> /dev/null; then
     echo -e "${GREEN}✓ Secret이 이미 존재합니다.${NC}"
 else
     echo ""
-    echo "환경 변수를 입력하세요:"
-    read -p "EMAIL_USER [lalavisit@naver.com]: " EMAIL_USER
-    EMAIL_USER=${EMAIL_USER:-lalavisit@naver.com}
-
-    read -sp "EMAIL_PASSWORD: " EMAIL_PASSWORD
+    echo "환경 변수를 설정합니다..."
+    echo "(환경 변수가 있으면 자동으로 사용됩니다)"
     echo ""
 
-    read -p "SMTP_HOST [smtp.naver.com]: " SMTP_HOST
-    SMTP_HOST=${SMTP_HOST:-smtp.naver.com}
+    # 환경변수 우선, 없으면 프롬프트
+    if [ -z "$EMAIL_USER" ]; then
+        read -p "EMAIL_USER [lalavisit@naver.com]: " EMAIL_USER
+        EMAIL_USER=${EMAIL_USER:-lalavisit@naver.com}
+    else
+        echo "EMAIL_USER: $EMAIL_USER (환경변수)"
+    fi
 
-    read -p "SMTP_PORT [587]: " SMTP_PORT
-    SMTP_PORT=${SMTP_PORT:-587}
+    if [ -z "$EMAIL_PASSWORD" ]; then
+        read -sp "EMAIL_PASSWORD: " EMAIL_PASSWORD
+        echo ""
+    else
+        echo "EMAIL_PASSWORD: ******* (환경변수)"
+    fi
 
-    read -p "CONTACT_EMAIL [lalavisit@naver.com]: " CONTACT_EMAIL
-    CONTACT_EMAIL=${CONTACT_EMAIL:-lalavisit@naver.com}
+    if [ -z "$SMTP_HOST" ]; then
+        read -p "SMTP_HOST [smtp.naver.com]: " SMTP_HOST
+        SMTP_HOST=${SMTP_HOST:-smtp.naver.com}
+    else
+        echo "SMTP_HOST: $SMTP_HOST (환경변수)"
+    fi
 
-    read -p "SITE_URL [https://www.lalavisit.com]: " SITE_URL
-    SITE_URL=${SITE_URL:-https://www.lalavisit.com}
+    if [ -z "$SMTP_PORT" ]; then
+        read -p "SMTP_PORT [587]: " SMTP_PORT
+        SMTP_PORT=${SMTP_PORT:-587}
+    else
+        echo "SMTP_PORT: $SMTP_PORT (환경변수)"
+    fi
 
-    read -p "KAKAO_CHANNEL_URL [https://pf.kakao.com/_xnxoxoxG/chat]: " KAKAO_URL
-    KAKAO_URL=${KAKAO_URL:-https://pf.kakao.com/_xnxoxoxG/chat}
+    if [ -z "$CONTACT_EMAIL" ]; then
+        read -p "CONTACT_EMAIL [lalavisit@naver.com]: " CONTACT_EMAIL
+        CONTACT_EMAIL=${CONTACT_EMAIL:-lalavisit@naver.com}
+    else
+        echo "CONTACT_EMAIL: $CONTACT_EMAIL (환경변수)"
+    fi
+
+    if [ -z "$SITE_URL" ]; then
+        read -p "SITE_URL [https://www.lalavisit.com]: " SITE_URL
+        SITE_URL=${SITE_URL:-https://www.lalavisit.com}
+    else
+        echo "SITE_URL: $SITE_URL (환경변수)"
+    fi
+
+    if [ -z "$KAKAO_CHANNEL_URL" ]; then
+        read -p "KAKAO_CHANNEL_URL [https://pf.kakao.com/_xnxoxoxG/chat]: " KAKAO_URL
+        KAKAO_URL=${KAKAO_URL:-https://pf.kakao.com/_xnxoxoxG/chat}
+    else
+        KAKAO_URL=$KAKAO_CHANNEL_URL
+        echo "KAKAO_CHANNEL_URL: $KAKAO_URL (환경변수)"
+    fi
 
     echo ""
     echo "Secret을 생성합니다..."
