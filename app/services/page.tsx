@@ -1,5 +1,23 @@
-import { Heart, Users, Home, Check } from "lucide-react";
+import { Heart, Users, Home, Check, DollarSign, ShoppingCart, FileText } from "lucide-react";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "서비스 안내 - 라라재가방문요양센터",
+  description: "방문요양, 가족요양, 입주간병 서비스 안내. 2025년 장기요양 수가 정보, 노인장기요양보험 신청 방법, 복지용구 대여 및 구입 안내",
+  keywords: "방문요양서비스, 가족요양비용, 입주간병비용, 장기요양수가, 노인장기요양보험, 복지용구, 요양보호사자격증",
+  openGraph: {
+    type: "website",
+    locale: "ko_KR",
+    url: "https://lalavisit.com/services",
+    title: "서비스 안내 - 라라재가방문요양센터",
+    description: "전문적이고 체계적인 요양 서비스 제공. 방문요양, 가족요양, 입주간병, 장기요양보험 안내",
+    siteName: "라라재가방문요양센터",
+  },
+  alternates: {
+    canonical: "https://lalavisit.com/services",
+  },
+};
 
 export default function ServicesPage() {
   return (
@@ -197,6 +215,328 @@ export default function ServicesPage() {
               <p className="text-gray-700">
                 가족과 긴밀하게 소통하여 어르신의 상태 변화를 공유하고, 함께 최선의 케어 방법을 찾아갑니다.
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Long-term Care Insurance */}
+      <section id="insurance" className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-5xl mx-auto">
+            <div className="flex items-center gap-4 mb-8">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
+                <FileText className="w-8 h-8 text-primary" />
+              </div>
+              <h2 className="text-3xl font-bold">노인장기요양보험</h2>
+            </div>
+
+            <div className="prose prose-lg max-w-none mb-8">
+              <p className="text-gray-700">
+                고령이나 노인성 질병 등으로 일상생활이 어려운 어르신에게 신체활동 및 일상생활 지원 서비스를 제공하는 사회보험제도입니다.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white p-6 rounded-xl shadow-sm">
+                <h3 className="font-semibold text-lg mb-4 text-primary">신청 대상</h3>
+                <ul className="space-y-2">
+                  {["만 65세 이상 노인", "65세 미만 노인성 질병자", "치매, 뇌혈관질환, 파킨슨병 등", "일상생활이 어려운 분"].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-gray-700">
+                      <Check className="w-5 h-5 text-primary flex-shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="bg-white p-6 rounded-xl shadow-sm">
+                <h3 className="font-semibold text-lg mb-4 text-primary">신청 방법</h3>
+                <ul className="space-y-2">
+                  {["국민건강보험공단 방문", "전화 신청 (1577-1000)", "인터넷 신청 (노인장기요양보험)", "우편 신청 가능"].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-gray-700">
+                      <Check className="w-5 h-5 text-primary flex-shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="bg-white p-6 rounded-xl shadow-sm mb-6">
+              <h3 className="font-semibold text-lg mb-4 text-primary">장기요양등급</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-4 py-3 text-left font-semibold">등급</th>
+                      <th className="px-4 py-3 text-left font-semibold">상태</th>
+                      <th className="px-4 py-3 text-left font-semibold">점수</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    <tr>
+                      <td className="px-4 py-3 font-medium">1등급</td>
+                      <td className="px-4 py-3">일상생활 전적으로 다른 사람의 도움이 필요</td>
+                      <td className="px-4 py-3">95점 이상</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-3 font-medium">2등급</td>
+                      <td className="px-4 py-3">일상생활 상당 부분 다른 사람의 도움이 필요</td>
+                      <td className="px-4 py-3">75점 이상</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-3 font-medium">3등급</td>
+                      <td className="px-4 py-3">일상생활 부분적으로 다른 사람의 도움이 필요</td>
+                      <td className="px-4 py-3">60점 이상</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-3 font-medium">4등급</td>
+                      <td className="px-4 py-3">일상생활 일정 부분 다른 사람의 도움이 필요</td>
+                      <td className="px-4 py-3">51점 이상</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-3 font-medium">5등급</td>
+                      <td className="px-4 py-3">치매 환자 (경증)</td>
+                      <td className="px-4 py-3">45점 이상</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-3 font-medium">인지지원등급</td>
+                      <td className="px-4 py-3">치매 환자 (경증 인지장애)</td>
+                      <td className="px-4 py-3">45점 미만</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div className="bg-primary/5 p-6 rounded-xl border-l-4 border-primary">
+              <h3 className="font-semibold mb-2">문의 및 상담</h3>
+              <p className="text-gray-700">
+                장기요양보험 신청 및 등급 판정에 대한 자세한 상담은 저희 센터로 연락주시면 친절하게 안내해 드리겠습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2025 Care Costs */}
+      <section id="care-costs" className="py-16 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-5xl mx-auto">
+            <div className="flex items-center gap-4 mb-8">
+              <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center">
+                <DollarSign className="w-8 h-8 text-secondary" />
+              </div>
+              <h2 className="text-3xl font-bold">2025년 방문요양 수가</h2>
+            </div>
+
+            <div className="prose prose-lg max-w-none mb-8">
+              <p className="text-gray-700">
+                2025년 장기요양 급여비용 및 본인부담금 안내입니다.
+                실제 이용 시간과 등급에 따라 본인부담금이 달라집니다.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-xl shadow-sm overflow-hidden mb-8">
+              <div className="bg-gradient-to-r from-secondary/10 to-primary/10 px-6 py-4">
+                <h3 className="font-semibold text-lg">방문요양 급여비용 (60분 기준)</h3>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-6 py-3 text-left font-semibold">등급</th>
+                      <th className="px-6 py-3 text-right font-semibold">총 비용</th>
+                      <th className="px-6 py-3 text-right font-semibold">본인부담금 (15%)</th>
+                      <th className="px-6 py-3 text-right font-semibold">본인부담금 (경감 6%)</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    <tr className="hover:bg-gray-50">
+                      <td className="px-6 py-4 font-medium">1등급</td>
+                      <td className="px-6 py-4 text-right">20,480원</td>
+                      <td className="px-6 py-4 text-right text-secondary font-semibold">3,072원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">1,229원</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50">
+                      <td className="px-6 py-4 font-medium">2등급</td>
+                      <td className="px-6 py-4 text-right">19,460원</td>
+                      <td className="px-6 py-4 text-right text-secondary font-semibold">2,919원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">1,168원</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50">
+                      <td className="px-6 py-4 font-medium">3등급</td>
+                      <td className="px-6 py-4 text-right">18,430원</td>
+                      <td className="px-6 py-4 text-right text-secondary font-semibold">2,765원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">1,106원</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50">
+                      <td className="px-6 py-4 font-medium">4등급</td>
+                      <td className="px-6 py-4 text-right">17,400원</td>
+                      <td className="px-6 py-4 text-right text-secondary font-semibold">2,610원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">1,044원</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50">
+                      <td className="px-6 py-4 font-medium">5등급</td>
+                      <td className="px-6 py-4 text-right">16,370원</td>
+                      <td className="px-6 py-4 text-right text-secondary font-semibold">2,456원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">982원</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50">
+                      <td className="px-6 py-4 font-medium">인지지원등급</td>
+                      <td className="px-6 py-4 text-right">16,370원</td>
+                      <td className="px-6 py-4 text-right text-secondary font-semibold">2,456원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">982원</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div className="bg-secondary/5 p-6 rounded-xl border-l-4 border-secondary">
+                <h3 className="font-semibold mb-3">본인부담금 경감 대상</h3>
+                <ul className="space-y-2 text-sm text-gray-700">
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-secondary flex-shrink-0" />
+                    <span>의료급여 수급자: 무료</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-secondary flex-shrink-0" />
+                    <span>기초생활수급자: 본인부담금 전액 면제</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-secondary flex-shrink-0" />
+                    <span>차상위계층: 본인부담금 6% (60% 경감)</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="bg-primary/5 p-6 rounded-xl border-l-4 border-primary">
+                <h3 className="font-semibold mb-3">이용 시간별 비용</h3>
+                <ul className="space-y-2 text-sm text-gray-700">
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-primary flex-shrink-0" />
+                    <span>30분: 60분 비용의 50%</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-primary flex-shrink-0" />
+                    <span>90분: 60분 비용 × 1.5배</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-primary flex-shrink-0" />
+                    <span>120분: 60분 비용 × 2배</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="bg-yellow-50 p-6 rounded-xl border-l-4 border-yellow-400">
+              <h3 className="font-semibold mb-2 text-yellow-800">안내사항</h3>
+              <p className="text-sm text-yellow-700">
+                위 비용은 2025년 기준이며, 지역 및 시간대에 따라 가산이 적용될 수 있습니다.
+                정확한 비용은 상담을 통해 안내해 드립니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Welfare Equipment */}
+      <section id="welfare-equipment" className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-5xl mx-auto">
+            <div className="flex items-center gap-4 mb-8">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
+                <ShoppingCart className="w-8 h-8 text-primary" />
+              </div>
+              <h2 className="text-3xl font-bold">복지용구</h2>
+            </div>
+
+            <div className="prose prose-lg max-w-none mb-8">
+              <p className="text-gray-700">
+                일상생활 또는 신체활동 지원에 필요한 용구를 저렴하게 구입하거나 대여할 수 있는 서비스입니다.
+                장기요양등급을 받으신 분은 복지용구 구입 및 대여 비용의 일부를 지원받을 수 있습니다.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white p-6 rounded-xl shadow-sm">
+                <h3 className="font-semibold text-lg mb-4 text-primary">대여 품목</h3>
+                <ul className="space-y-2">
+                  {[
+                    "수동 휠체어 / 전동 휠체어",
+                    "전동침대 / 수동침대",
+                    "이동욕조 / 목욕리프트",
+                    "배회감지기 / 경사로",
+                    "보행기 / 보행차",
+                    "욕창예방매트리스"
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-gray-700">
+                      <Check className="w-5 h-5 text-primary flex-shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="bg-white p-6 rounded-xl shadow-sm">
+                <h3 className="font-semibold text-lg mb-4 text-primary">구입 품목</h3>
+                <ul className="space-y-2">
+                  {[
+                    "보행보조차 / 지팡이",
+                    "욕창예방방석",
+                    "이동변기 / 목욕의자",
+                    "안전손잡이 / 미끄럼방지용품",
+                    "간이변기 / 지지대",
+                    "자세변환용구"
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-gray-700">
+                      <Check className="w-5 h-5 text-primary flex-shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="bg-white p-6 rounded-xl shadow-sm mb-6">
+              <h3 className="font-semibold text-lg mb-4 text-primary">본인부담금</h3>
+              <div className="space-y-3 text-gray-700">
+                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <span className="font-medium">일반 수급자</span>
+                  <span className="text-secondary font-semibold">15% 부담</span>
+                </div>
+                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <span className="font-medium">의료급여 수급자</span>
+                  <span className="text-secondary font-semibold">전액 무료</span>
+                </div>
+                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <span className="font-medium">차상위계층</span>
+                  <span className="text-secondary font-semibold">6% 부담 (60% 경감)</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-primary/5 p-6 rounded-xl border-l-4 border-primary">
+                <h3 className="font-semibold mb-3">연간 한도액</h3>
+                <p className="text-gray-700 mb-2">
+                  <span className="font-semibold text-primary">대여:</span> 연간 180만원
+                </p>
+                <p className="text-gray-700">
+                  <span className="font-semibold text-primary">구입:</span> 연간 160만원
+                </p>
+              </div>
+
+              <div className="bg-secondary/5 p-6 rounded-xl border-l-4 border-secondary">
+                <h3 className="font-semibold mb-3">신청 방법</h3>
+                <p className="text-gray-700 text-sm">
+                  복지용구 사업소 또는 저희 센터를 통해 신청하실 수 있습니다.
+                  상담을 통해 필요한 용구를 추천해 드립니다.
+                </p>
+              </div>
             </div>
           </div>
         </div>

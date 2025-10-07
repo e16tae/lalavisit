@@ -1,4 +1,4 @@
-# Multi-stage build for production
+# Base image
 FROM node:20-alpine AS base
 
 # Install dependencies only when needed
@@ -7,7 +7,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # Copy package files
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json* ./
 RUN npm ci
 
 # Rebuild the source code only when needed
@@ -18,8 +18,9 @@ COPY . .
 
 # Set environment variables for build
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV NODE_ENV=production
 
-# Build the application
+# Build application
 RUN npm run build
 
 # Production image, copy all the files and run next
@@ -29,7 +30,6 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Create a non-root user
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
@@ -38,7 +38,7 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
-# Set the correct permission for prerender cache
+# Set permissions
 RUN chown -R nextjs:nodejs /app
 
 USER nextjs

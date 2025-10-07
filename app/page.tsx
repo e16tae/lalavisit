@@ -1,5 +1,24 @@
 import Link from "next/link";
 import { Heart, Users, Home, ArrowRight } from "lucide-react";
+import type { Metadata } from "next";
+import { ReviewsSection } from "@/components/reviews-section";
+
+export const metadata: Metadata = {
+  title: "라라재가방문요양센터 - 믿을 수 있는 전문 요양 서비스",
+  description: "서울 송파구 가락동 위치. 방문요양, 가족요양, 입주간병 서비스 제공. 장기요양등급 1~5등급, 인지지원등급 어르신을 위한 전문 케어. 02-430-2351",
+  keywords: "방문요양, 가족요양, 입주간병, 요양보호사, 재가요양, 송파구요양, 가락동요양, 장기요양보험, 노인요양, 요양서비스",
+  openGraph: {
+    type: "website",
+    locale: "ko_KR",
+    url: "https://lalavisit.com",
+    title: "라라재가방문요양센터 - 믿을 수 있는 전문 요양 서비스",
+    description: "사랑과 정성으로 어르신들의 건강한 일상을 함께합니다. 방문요양, 가족요양, 입주간병 전문 센터",
+    siteName: "라라재가방문요양센터",
+  },
+  alternates: {
+    canonical: "https://lalavisit.com",
+  },
+};
 
 export default function HomePage() {
   return (
@@ -90,6 +109,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Reviews Section */}
+      <ReviewsSection />
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-primary to-secondary text-white">

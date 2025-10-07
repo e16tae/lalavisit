@@ -1,241 +1,213 @@
-# 라라방문 - 라라재가방문요양센터 홈페이지
+# 라라재가방문요양센터 웹사이트
 
-라라재가방문요양센터의 공식 웹사이트입니다. Next.js, TypeScript, Tailwind CSS, shadcn/ui를 기반으로 구축되었습니다.
+믿을 수 있는 방문요양, 가족요양, 입주간병 서비스를 제공하는 라라재가방문요양센터의 공식 웹사이트 '라라방문'입니다.
 
-## 🚀 주요 기능
+## 🚀 기술 스택
 
-- **홈페이지**: 센터 소개 및 서비스 개요
-- **소개**: 인사말, 센터장 프로필, 네이버 지도 연동
-- **서비스**: 방문요양, 가족요양, 입주간병 안내
-- **활동**: 현장 사진 및 교육 사진 갤러리
-- **문의**: 전화연결, 상담요청 폼, 카카오채널 연동
-- **플로팅 문의 버튼**: 모든 페이지에서 접근 가능한 문의 버튼
-
-## 🛠 기술 스택
-
-- **Frontend**: Next.js 15, React, TypeScript
-- **Styling**: Tailwind CSS, shadcn/ui
-- **Deployment**: Docker, Kubernetes, ArgoCD
+- **Framework**: Next.js 15 (App Router, Standalone Mode)
+- **언어**: TypeScript
+- **스타일링**: Tailwind CSS 4, shadcn/ui
+- **폰트**: Pretendard Variable
+- **아이콘**: Lucide React
+- **이메일**: Nodemailer (네이버 SMTP)
+- **Analytics**: Google Analytics (선택사항)
+- **배포**: Docker + Kubernetes + ArgoCD
 - **CI/CD**: GitHub Actions
 
-## 📦 시작하기
+## 📦 주요 기능
 
-### 개발 환경 설정
+### ✅ 완료된 기능
 
-1. 저장소 클론
+1. **SEO 최적화**
+   - 페이지별 메타데이터 (Open Graph, Twitter Cards)
+   - sitemap.xml / robots.txt 자동 생성
+   - Schema.org 구조화된 데이터 (LocalBusiness, Service)
+   - PWA manifest
 
-```bash
-git clone https://github.com/e16tae/lalavisit.git
-cd lalavisit
-```
+2. **서비스 페이지**
+   - 방문요양, 가족요양, 입주간병 안내
+   - 노인장기요양보험 제도 안내
+   - 2025년 방문요양 수가 정보
+   - 복지용구 대여/구입 안내
 
-2. 의존성 설치
+3. **소개 페이지**
+   - 센터 인삿말
+   - 센터장 프로필
+   - 네이버 지도 연동
+   - 찾아오는 길 안내
+
+4. **활동 갤러리**
+   - 현장 사진 (요양등급, 서비스 정보 표기)
+   - 교육 사진 (교육 유형, 시간 표기)
+   - 탭 UI로 구분
+
+5. **문의 기능**
+   - 플로팅 버튼 (전화, 카카오톡, 이메일, 상담신청)
+   - 상담 요청 폼
+   - 네이버 SMTP로 이메일 전송
+
+6. **후기/리뷰**
+   - 홈페이지 리뷰 섹션
+   - 카루셀 UI
+   - 통계 표시
+
+7. **에러 처리**
+   - 404 Not Found
+   - 500 Server Error
+   - Global Error
+   - Loading States
+
+8. **성능 최적화**
+   - 이미지 최적화 (AVIF, WebP)
+   - React 엄격 모드
+   - Multi-stage Docker build
+
+9. **접근성**
+   - Skip to content
+   - ARIA 레이블
+   - 키보드 네비게이션
+   - Screen reader 지원
+
+10. **CI/CD**
+    - GitHub Actions 자동 빌드
+    - Docker 이미지 자동 생성
+    - ArgoCD GitOps 배포
+
+## 🛠️ 설치 및 실행
+
+### 사전 요구사항
+
+- Node.js 20 이상
+- Docker (배포 시)
+- K8s 클러스터 (배포 시)
+
+### 설치
 
 ```bash
 npm install
 ```
 
-3. 개발 서버 실행
+### 환경 변수 설정
+
+`.env.local` 파일을 생성하고 다음 내용을 추가하세요:
+
+```bash
+# 네이버 메일 SMTP 설정
+EMAIL_USER=lalavisit@naver.com
+EMAIL_PASSWORD=YOUR_PASSWORD
+SMTP_HOST=smtp.naver.com
+SMTP_PORT=587
+
+# 센터 이메일
+CONTACT_EMAIL=lalavisit@naver.com
+
+# 사이트 URL
+NEXT_PUBLIC_SITE_URL=https://www.lalavisit.com
+
+# Google Analytics (선택사항)
+# NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+
+# 카카오톡 채널
+NEXT_PUBLIC_KAKAO_CHANNEL_URL=https://pf.kakao.com/_xnxoxoxG/chat
+```
+
+### 개발 서버 실행
 
 ```bash
 npm run dev
 ```
 
-4. 브라우저에서 [http://localhost:3000](http://localhost:3000) 접속
+브라우저에서 [http://localhost:3000](http://localhost:3000)을 엽니다.
 
-### 빌드
+### 프로덕션 빌드
 
 ```bash
 npm run build
 npm start
 ```
 
-## 📂 프로젝트 구조
+## 📁 프로젝트 구조
 
 ```
 lalavisit/
-├── app/                    # Next.js App Router
-│   ├── about/             # 소개 페이지
-│   ├── services/          # 서비스 페이지
-│   ├── activities/        # 활동 페이지
-│   ├── contact/           # 문의 페이지
-│   ├── api/               # API Routes
-│   │   └── contact/       # 상담 신청 API
-│   ├── layout.tsx         # 루트 레이아웃
-│   ├── page.tsx           # 홈페이지
-│   └── globals.css        # 전역 스타일
-├── components/            # React 컴포넌트
-│   ├── navigation.tsx     # 네비게이션 바
-│   ├── floating-contact.tsx # 플로팅 문의 버튼
-│   └── footer.tsx         # 푸터
-├── data/                  # 데이터 파일
-│   └── activities.json    # 활동 메타데이터
-├── public/                # 정적 파일
-│   ├── logo.svg          # 센터 로고
-│   └── activities/       # 활동 사진 (업로드 필요)
-├── k8s/                   # Kubernetes 설정
-│   ├── deployment.yaml   # K8s Deployment, Service, Ingress
-│   └── argocd-app.yaml   # ArgoCD Application
 ├── .github/
 │   └── workflows/
-│       └── ci-cd.yml     # GitHub Actions CI/CD
-├── Dockerfile            # Docker 이미지 빌드
-└── next.config.ts        # Next.js 설정
+│       └── ci-cd.yaml           # GitHub Actions CI/CD
+├── app/                         # Next.js App Router
+│   ├── about/                   # 센터 소개
+│   ├── activities/              # 활동 갤러리
+│   ├── api/                     # API Routes
+│   ├── contact/                 # 상담 신청
+│   └── services/                # 서비스 안내
+├── argocd/
+│   └── application.yaml         # ArgoCD Application
+├── components/                  # React 컴포넌트
+│   ├── floating-contact.tsx
+│   ├── footer.tsx
+│   ├── google-analytics.tsx
+│   ├── navigation.tsx
+│   ├── reviews-section.tsx
+│   └── schema-org.tsx
+├── data/                        # JSON 데이터
+│   ├── activities.json          # 활동 사진 메타데이터
+│   └── reviews.json             # 후기 데이터
+├── k8s/                         # Kubernetes 매니페스트
+│   ├── namespace.yaml
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   ├── ingress.yaml
+│   └── secret-example.yaml
+├── lib/
+│   └── utils.ts                 # shadcn/ui utils
+├── public/                      # 정적 파일
+│   ├── activities/
+│   └── logo.svg
+├── Dockerfile                   # Multi-stage Docker build
+├── .dockerignore
+├── DEPLOYMENT.md                # K8s 배포 가이드
+├── ADMIN_GUIDE.md               # 콘텐츠 관리 가이드
+└── README.md
 ```
 
-## 🎨 테마 색상
+## 📝 콘텐츠 관리
 
-로고(logo.svg)의 색상을 기반으로 구성:
-- Primary: `#22BBB4` (청록색)
-- Secondary: `#00ACE2` (파란색)
+콘텐츠 관리 방법은 [ADMIN_GUIDE.md](./ADMIN_GUIDE.md)를 참고하세요.
 
-## 📝 활동 사진 업로드
+- 활동 사진: `data/activities.json`
+- 후기: `data/reviews.json`
 
-1. 사진 파일을 `public/activities/` 폴더에 저장
-2. `data/activities.json` 파일에 메타데이터 추가
+## 🌐 배포
 
-### 현장 사진 예시
+K8s 클러스터에 배포하는 방법은 [DEPLOYMENT.md](./DEPLOYMENT.md)를 참고하세요.
 
-```json
-{
-  "id": "field-001",
-  "title": "방문요양 서비스 현장",
-  "date": "2025-03-15",
-  "careGrade": "2등급",
-  "service": "방문요양",
-  "image": "/activities/field-001.jpg",
-  "description": "어르신과 함께하는 일상생활 지원 서비스"
-}
-```
+### 빠른 시작
 
-### 교육 사진 예시
+1. **GitHub 저장소 push**
+   ```bash
+   git push origin main
+   ```
 
-```json
-{
-  "id": "edu-001",
-  "title": "요양보호사 보수교육",
-  "date": "2025-04-01",
-  "educationType": "보수교육",
-  "hours": "8시간",
-  "image": "/activities/edu-001.jpg",
-  "description": "전문성 향상을 위한 정기 보수교육"
-}
-```
+2. **GitHub Actions 자동 실행**
+   - 빌드 및 테스트
+   - Docker 이미지 생성
+   - GHCR에 이미지 push
 
-## 🔧 환경 변수
+3. **ArgoCD 자동 배포**
+   - K8s 매니페스트 동기화
+   - 자동으로 클러스터에 배포
 
-이메일 발송 기능을 사용하려면 `.env.local` 파일을 생성하고 다음 환경 변수를 설정하세요:
+## 📊 빌드 정보
 
-```env
-# 이메일 설정 (예: Gmail)
-EMAIL_USER=your-email@gmail.com
-EMAIL_PASSWORD=your-app-password
+- **빌드 크기**: ~129-132 KB (First Load JS)
+- **페이지 수**: 13개 (정적 생성)
+- **이미지 크기**: ~100MB (Docker)
 
-# 카카오톡 비즈니스 API (선택사항)
-KAKAO_CHANNEL_ID=your-channel-id
-```
+## 📞 문의
 
-## 🐳 Docker 빌드 및 실행
-
-### 로컬에서 Docker 이미지 빌드
-
-```bash
-docker build -t lalavisit:latest .
-```
-
-### Docker 컨테이너 실행
-
-```bash
-docker run -p 3000:3000 lalavisit:latest
-```
-
-## ☸️ Kubernetes 배포
-
-### 사전 준비
-
-1. GitHub Container Registry에 이미지 푸시 권한 설정
-2. Kubernetes 클러스터 준비
-3. ArgoCD 설치 및 설정
-
-### 배포 단계
-
-1. GitHub Container Registry 로그인 시크릿 생성
-
-```bash
-kubectl create secret docker-registry ghcr-secret \
-  --docker-server=ghcr.io \
-  --docker-username=e16tae \
-  --docker-password=YOUR_GITHUB_TOKEN \
-  --docker-email=YOUR_EMAIL
-```
-
-2. ArgoCD Application 생성
-
-```bash
-kubectl apply -f k8s/argocd-app.yaml
-```
-
-3. ArgoCD가 자동으로 애플리케이션을 동기화하고 배포합니다.
-
-### 수동 배포 (ArgoCD 없이)
-
-```bash
-kubectl apply -f k8s/deployment.yaml
-```
-
-## 🔄 CI/CD 파이프라인
-
-GitHub Actions를 통한 자동 배포:
-
-1. `main` 브랜치에 코드 푸시
-2. GitHub Actions가 자동으로:
-   - 테스트 및 빌드 실행
-   - Docker 이미지 빌드 및 GHCR에 푸시
-   - ArgoCD 동기화 트리거
-3. ArgoCD가 Kubernetes 클러스터에 자동 배포
-
-### GitHub Secrets 설정
-
-`.github/workflows/ci-cd.yml`에서 사용되는 시크릿:
-
-- `ARGOCD_SERVER`: ArgoCD 서버 주소
-- `ARGOCD_AUTH_TOKEN`: ArgoCD 인증 토큰
-
-## 🔗 도메인 설정
-
-1. DNS 레코드 설정:
-   - `A` 레코드: `lalavisit.com` → Kubernetes Ingress IP
-   - `A` 레코드: `www.lalavisit.com` → Kubernetes Ingress IP
-
-2. SSL 인증서는 cert-manager가 자동으로 발급 (Let's Encrypt)
-
-## 📞 센터 정보
-
-### 연락처
-- **센터 전화**: 02-430-2351
-- **센터장 휴대폰**: 010-9573-2351
+- **전화**: 02-430-2351 / 010-9573-2351
 - **이메일**: lalavisit@naver.com
+- **주소**: 서울 송파구 송파대로24길 5-14 3층 303호
 
-### 주소
-- **도로명**: 서울 송파구 송파대로24길 5-14 3층 303호
-- **지번**: 서울 송파구 가락동 104-7 303호
-- **우편번호**: 05831
+---
 
-### 찾아오시는 길
-- **지하철**: 8호선 가락시장역 6번 출구에서 도보 5분
-- **버스**: 문정로데오거리입구 정류장 하차 - 461(간선), 3011/3217/3317(지선), 36(일반)
-
-### 기관 정보
-- **기관기호**: 2-11710-00469
-- **고유번호증**: 530-80-03437
-
-### 운영 시간
-- **24시간 연중무휴**
-
-## 📄 라이선스
-
-이 프로젝트는 라라재가방문요양센터의 소유입니다.
-
-## 🙏 도움말
-
-문제가 발생하거나 질문이 있으신 경우 이슈를 생성해 주세요.
+© 2025 라라재가방문요양센터. All rights reserved.

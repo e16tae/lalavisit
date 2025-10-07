@@ -1,13 +1,40 @@
-Dockerfile
-.dockerignore
+# Dependencies
 node_modules
 npm-debug.log
-README.md
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Next.js
 .next
+out
+build
+
+# Environment
+.env
+.env.local
+.env*.local
+
+# Git
 .git
 .gitignore
-.env*.local
+
+# IDE
 .vscode
 .idea
+*.swp
+*.swo
+
+# OS
 .DS_Store
+Thumbs.db
+
+# Testing
+coverage
+.nyc_output
+
+# Misc
 *.log
+README.md
+ADMIN_GUIDE.md
+.eslintrc.json

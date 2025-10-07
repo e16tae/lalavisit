@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Phone, MessageSquare, Mail, Send, MapPin, Clock } from "lucide-react";
+import { Phone, MessageSquare, Mail, Send, Clock } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 
 export default function ContactPage() {

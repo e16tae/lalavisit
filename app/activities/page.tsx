@@ -1,11 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { Camera, GraduationCap, Calendar, Tag, Clock } from "lucide-react";
 import activitiesData from "@/data/activities.json";
 
 type ActivityType = "field" | "education";
+
+// Note: metadata는 client component에서 export할 수 없으므로
+// 별도의 layout.tsx나 page.tsx로 감싸야 합니다.
+// 현재는 "use client"로 인해 메타데이터를 직접 설정할 수 없습니다.
 
 export default function ActivitiesPage() {
   const [activeTab, setActiveTab] = useState<ActivityType>("field");

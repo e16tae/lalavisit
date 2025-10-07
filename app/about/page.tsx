@@ -1,4 +1,22 @@
 import { MapPin, Phone, Mail, User } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "센터 소개 - 라라재가방문요양센터",
+  description: "서울 송파구 가락동 위치. 센터장 이경빈. 전화: 02-430-2351, 010-9573-2351. 가락시장역 6번 출구 도보 5분. 전문 요양보호사와 사회복지사가 함께합니다.",
+  keywords: "송파구요양센터, 가락동요양센터, 요양센터위치, 요양센터전화번호, 가락시장역요양센터",
+  openGraph: {
+    type: "website",
+    locale: "ko_KR",
+    url: "https://lalavisit.com/about",
+    title: "센터 소개 - 라라재가방문요양센터",
+    description: "어르신들께 최상의 요양 서비스를 제공하는 라라재가방문요양센터를 소개합니다",
+    siteName: "라라재가방문요양센터",
+  },
+  alternates: {
+    canonical: "https://lalavisit.com/about",
+  },
+};
 
 export default function AboutPage() {
   return (
