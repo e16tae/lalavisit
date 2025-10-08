@@ -42,7 +42,7 @@ export default function HomePage() {
                 href="/contact"
                 className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-full font-semibold hover:shadow-lg transition-all hover:scale-105"
               >
-                상담 신청하기
+                서비스 문의하기
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <Link

@@ -39,7 +39,7 @@ export function FloatingContact() {
               <span className="text-sm font-medium">이메일</span>
             </a>
             <Link
-              href="/contact"
+              href="/contact?action=form"
               className="flex items-center gap-2 bg-secondary text-white px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all group"
             >
               <MessageSquare className="w-5 h-5 group-hover:scale-110 transition-transform" />
