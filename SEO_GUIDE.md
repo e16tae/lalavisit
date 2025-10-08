@@ -95,30 +95,16 @@ NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=여기에_구글_인증코드_입력
 NEXT_PUBLIC_NAVER_SITE_VERIFICATION=여기에_네이버_인증코드_입력
 ```
 
-### 3.2 프로덕션 환경 (Kubernetes)
+### 3.2 프로덕션 환경 (Vercel)
 
-`k8s/secret.yaml` 파일 수정:
+Vercel Dashboard에서 환경 변수 설정:
 
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: lalavisit-secrets
-  namespace: lalavisit
-type: Opaque
-stringData:
-  # ... 기존 설정 ...
-
-  # 검색엔진 사이트 소유권 인증
-  NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: "여기에_구글_인증코드_입력"
-  NEXT_PUBLIC_NAVER_SITE_VERIFICATION: "여기에_네이버_인증코드_입력"
-```
-
-배포:
-```bash
-kubectl apply -f k8s/secret.yaml
-kubectl rollout restart deployment/lalavisit -n lalavisit
-```
+1. Vercel Dashboard → 프로젝트 선택
+2. Settings → Environment Variables
+3. 다음 변수 추가:
+   - `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`: 구글 인증 코드
+   - `NEXT_PUBLIC_NAVER_SITE_VERIFICATION`: 네이버 인증 코드
+4. 저장 후 자동 재배포
 
 ---
 
