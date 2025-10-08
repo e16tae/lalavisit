@@ -27,8 +27,18 @@ export default function ContactPage() {
       // 카카오톡 섹션으로 스크롤
       document.getElementById("kakao-section")?.scrollIntoView({ behavior: "smooth" });
     } else if (action === "form") {
-      // 상담요청 섹션으로 스크롤
-      document.getElementById("form-section")?.scrollIntoView({ behavior: "smooth" });
+      // 상담요청 섹션으로 스크롤 (헤더와 패딩을 고려하여 offset 적용)
+      const element = document.getElementById("form-section");
+      if (element) {
+        const offset = 80; // 헤더 높이 + 여백
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
     }
   }, [searchParams]);
 
