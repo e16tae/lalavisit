@@ -6,6 +6,9 @@ import { useSearchParams } from "next/navigation";
 
 export default function ContactPage() {
   const searchParams = useSearchParams();
+  const kakaoChannelId = process.env.NEXT_PUBLIC_KAKAO_CHANNEL_ID || "_xnxoxoxG";
+  const kakaoAddUrl = `https://pf.kakao.com/${kakaoChannelId}/friend`;
+  const kakaoChatUrl = `https://pf.kakao.com/${kakaoChannelId}/chat`;
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -136,14 +139,24 @@ export default function ContactPage() {
               <p className="text-gray-600 mb-6">
                 실시간 채팅으로 빠른 상담이 가능합니다
               </p>
-              <a
-                href="http://pf.kakao.com/_xYOUR_KAKAO_ID"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-[#FEE500] text-[#3C1E1E] px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-all"
-              >
-                카카오톡 채널 열기
-              </a>
+              <div className="flex flex-col gap-3">
+                <a
+                  href={kakaoAddUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-white text-[#3C1E1E] px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-all border-2 border-[#FEE500]"
+                >
+                  친구 추가하기
+                </a>
+                <a
+                  href={kakaoChatUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-[#FEE500] text-[#3C1E1E] px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-all"
+                >
+                  바로 채팅하기
+                </a>
+              </div>
             </div>
 
             {/* Email Contact */}

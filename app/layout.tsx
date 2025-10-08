@@ -13,16 +13,52 @@ import { Navigation } from "@/components/navigation";
 import { FloatingContact } from "@/components/floating-contact";
 import { Footer } from "@/components/footer";
 import { LocalBusinessSchema, ServiceSchema } from "@/components/schema-org";
-import { GoogleAnalytics } from "@/components/google-analytics";
 import { SkipToContent } from "@/components/skip-to-content";
 
 export const metadata: Metadata = {
-  title: "라라방문 - 라라재가방문요양센터",
-  description: "믿을 수 있는 방문요양, 가족요양, 입주간병 서비스를 제공하는 라라재가방문요양센터입니다.",
-  keywords: "방문요양, 가족요양, 입주간병, 요양보호사, 재가요양",
+  metadataBase: new URL("https://www.lalavisit.com"),
+  title: {
+    default: "라라재가방문요양센터 - 믿을 수 있는 전문 요양 서비스",
+    template: "%s | 라라재가방문요양센터",
+  },
+  description: "서울 송파구 가락동 위치. 방문요양, 가족요양, 입주간병 서비스 제공. 장기요양등급 1~5등급, 인지지원등급 어르신을 위한 전문 케어. 02-430-2351",
+  keywords: ["방문요양", "가족요양", "입주간병", "요양보호사", "재가요양", "송파구요양", "가락동요양", "장기요양보험", "노인요양", "요양서비스"],
+  authors: [{ name: "라라재가방문요양센터" }],
+  creator: "라라재가방문요양센터",
+  publisher: "라라재가방문요양센터",
+  openGraph: {
+    type: "website",
+    locale: "ko_KR",
+    url: "https://www.lalavisit.com",
+    title: "라라재가방문요양센터 - 믿을 수 있는 전문 요양 서비스",
+    description: "사랑과 정성으로 어르신들의 건강한 일상을 함께합니다. 방문요양, 가족요양, 입주간병 전문 센터",
+    siteName: "라라재가방문요양센터",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "라라재가방문요양센터 - 믿을 수 있는 전문 요양 서비스",
+    description: "사랑과 정성으로 어르신들의 건강한 일상을 함께합니다.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: "/logo.svg",
     apple: "/logo.svg",
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    other: {
+      "naver-site-verification": process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION || "",
+    },
   },
 };
 
@@ -31,8 +67,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID;
-
   return (
     <html lang="ko">
       <head>
@@ -43,7 +77,6 @@ export default function RootLayout({
         className={`${pretendard.variable} antialiased`}
         style={{ fontFamily: 'var(--font-pretendard)' }}
       >
-        {gaId && <GoogleAnalytics gaId={gaId} />}
         <SkipToContent />
         <Navigation />
         <main id="main-content" className="pt-16 min-h-screen" tabIndex={-1}>

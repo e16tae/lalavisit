@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: process.env.CONTACT_EMAIL || "lalavisit@naver.com",
-      subject: `[라라방문] 새로운 상담 신청 - ${name}님`,
+      subject: `[라라재가방문요양] 새로운 상담 신청 - ${name}님`,
       text: emailContent,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

@@ -8,7 +8,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <Image src="/logo.svg" alt="라라방문 로고" width={32} height={32} />
+              <Image src="/logo.svg" alt="라라재가방문요양 로고" width={32} height={32} />
               <span className="text-lg font-bold bg-gradient-to-r from-[#22BBB4] to-[#00ACE2] bg-clip-text text-transparent">
                 라라재가방문요양센터
               </span>

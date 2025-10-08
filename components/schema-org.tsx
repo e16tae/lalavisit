@@ -2,11 +2,11 @@ export function LocalBusinessSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": "https://lalavisit.com/#organization",
+    "@id": "https://www.lalavisit.com/#organization",
     name: "라라재가방문요양센터",
-    image: "https://lalavisit.com/logo.svg",
+    image: "https://www.lalavisit.com/logo.svg",
     description: "믿을 수 있는 방문요양, 가족요양, 입주간병 서비스를 제공하는 전문 요양센터",
-    url: "https://lalavisit.com",
+    url: "https://www.lalavisit.com",
     telephone: "+82-2-430-2351",
     email: "lalavisit@naver.com",
     address: {
@@ -57,7 +57,7 @@ export function ServiceSchema() {
     "@type": "Service",
     serviceType: "재가 방문요양 서비스",
     provider: {
-      "@id": "https://lalavisit.com/#organization"
+      "@id": "https://www.lalavisit.com/#organization"
     },
     areaServed: {
       "@type": "City",

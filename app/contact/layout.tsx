@@ -7,13 +7,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    url: "https://lalavisit.com/contact",
+    url: "https://www.lalavisit.com/contact",
     title: "상담 신청 - 라라재가방문요양센터",
     description: "친절하게 상담해 드립니다. 지금 바로 무료 상담을 신청하세요.",
     siteName: "라라재가방문요양센터",
   },
   alternates: {
-    canonical: "https://lalavisit.com/contact",
+    canonical: "https://www.lalavisit.com/contact",
   },
 };
 

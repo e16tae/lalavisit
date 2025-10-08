@@ -167,12 +167,12 @@ else
         echo "SITE_URL: $SITE_URL (환경변수)"
     fi
 
-    if [ -z "$KAKAO_CHANNEL_URL" ]; then
-        read -p "KAKAO_CHANNEL_URL [https://pf.kakao.com/_xnxoxoxG/chat]: " KAKAO_URL
-        KAKAO_URL=${KAKAO_URL:-https://pf.kakao.com/_xnxoxoxG/chat}
+    if [ -z "$KAKAO_CHANNEL_ID" ]; then
+        read -p "KAKAO_CHANNEL_ID [_xnxoxoxG]: " KAKAO_ID
+        KAKAO_ID=${KAKAO_ID:-_xnxoxoxG}
     else
-        KAKAO_URL=$KAKAO_CHANNEL_URL
-        echo "KAKAO_CHANNEL_URL: $KAKAO_URL (환경변수)"
+        KAKAO_ID=$KAKAO_CHANNEL_ID
+        echo "KAKAO_CHANNEL_ID: $KAKAO_ID (환경변수)"
     fi
 
     echo ""
@@ -189,7 +189,7 @@ else
         --from-literal=SMTP_PORT="$SMTP_PORT" \
         --from-literal=CONTACT_EMAIL="$CONTACT_EMAIL" \
         --from-literal=NEXT_PUBLIC_SITE_URL="$SITE_URL" \
-        --from-literal=NEXT_PUBLIC_KAKAO_CHANNEL_URL="$KAKAO_URL"
+        --from-literal=NEXT_PUBLIC_KAKAO_CHANNEL_ID="$KAKAO_ID"
 
     echo -e "${GREEN}✓ Secret 생성 완료${NC}"
 fi

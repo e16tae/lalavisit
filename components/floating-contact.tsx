@@ -7,7 +7,8 @@ import { KakaoIcon } from "./kakao-icon";
 
 export function FloatingContact() {
   const [isOpen, setIsOpen] = useState(false);
-  const kakaoChannelUrl = process.env.NEXT_PUBLIC_KAKAO_CHANNEL_URL || "https://pf.kakao.com/_xnxoxoxG/chat";
+  const kakaoChannelId = process.env.NEXT_PUBLIC_KAKAO_CHANNEL_ID || "_xnxoxoxG";
+  const kakaoChatUrl = `https://pf.kakao.com/${kakaoChannelId}/chat`;
 
   return (
     <>
@@ -21,16 +22,15 @@ export function FloatingContact() {
               <Phone className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
               <span className="text-sm font-medium">전화상담</span>
             </a>
-            <button
-              onClick={() => alert('카카오톡 채널은 현재 준비중입니다.\n빠른 시일 내에 오픈하겠습니다.')}
-              className="flex items-center gap-2 bg-gray-100 px-4 py-3 rounded-full shadow-lg cursor-not-allowed border border-gray-300 relative"
+            <a
+              href={kakaoChatUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-[#FEE500] px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all border border-[#FEE500] group"
             >
-              <KakaoIcon className="w-5 h-5 text-gray-400" />
-              <span className="text-sm font-medium text-gray-500">카카오톡</span>
-              <span className="absolute -top-1 -right-1 bg-yellow-400 text-xs px-2 py-0.5 rounded-full text-gray-800 font-semibold">
-                준비중
-              </span>
-            </button>
+              <KakaoIcon className="w-5 h-5 text-[#3C1E1E] group-hover:scale-110 transition-transform" />
+              <span className="text-sm font-medium text-[#3C1E1E]">카카오톡 채팅</span>
+            </a>
             <a
               href="mailto:lalavisit@naver.com"
               className="flex items-center gap-2 bg-white px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all border border-gray-200 group"

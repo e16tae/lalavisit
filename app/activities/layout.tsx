@@ -7,13 +7,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    url: "https://lalavisit.com/activities",
+    url: "https://www.lalavisit.com/activities",
     title: "활동 갤러리 - 라라재가방문요양센터",
     description: "현장 활동과 교육 활동을 통해 전문성을 높이고 있습니다",
     siteName: "라라재가방문요양센터",
   },
   alternates: {
-    canonical: "https://lalavisit.com/activities",
+    canonical: "https://www.lalavisit.com/activities",
   },
 };
 

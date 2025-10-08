@@ -9,13 +9,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    url: "https://lalavisit.com/services",
+    url: "https://www.lalavisit.com/services",
     title: "서비스 안내 - 라라재가방문요양센터",
     description: "전문적이고 체계적인 요양 서비스 제공. 방문요양, 가족요양, 입주간병, 장기요양보험 안내",
     siteName: "라라재가방문요양센터",
   },
   alternates: {
-    canonical: "https://lalavisit.com/services",
+    canonical: "https://www.lalavisit.com/services",
   },
 };
 

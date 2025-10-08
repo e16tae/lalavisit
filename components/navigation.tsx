@@ -20,9 +20,9 @@ export function Navigation() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center space-x-2">
-            <Image src="/logo.svg" alt="라라방문 로고" width={40} height={40} />
+            <Image src="/logo.svg" alt="라라재가방문요양 로고" width={40} height={40} />
             <span className="text-xl font-bold bg-gradient-to-r from-[#22BBB4] to-[#00ACE2] bg-clip-text text-transparent">
-              라라방문
+              라라재가방문요양
             </span>
           </Link>
 
