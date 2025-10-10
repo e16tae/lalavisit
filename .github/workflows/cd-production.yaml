@@ -36,7 +36,8 @@ jobs:
 
       - name: Build verification
         env:
-          NEXT_PUBLIC_SITE_URL: https://www.lalavisit.com
+          NEXT_PUBLIC_SITE_URL: ${{ secrets.SITE_URL || 'https://www.lalavisit.com' }}
+          NEXT_PUBLIC_KAKAO_CHANNEL_ID: ${{ secrets.KAKAO_CHANNEL_ID }}
         run: npm run build
 
   build-and-push:
@@ -82,7 +83,10 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            NEXT_PUBLIC_SITE_URL=https://www.lalavisit.com
+            NEXT_PUBLIC_SITE_URL=${{ secrets.SITE_URL || 'https://www.lalavisit.com' }}
+            NEXT_PUBLIC_KAKAO_CHANNEL_ID=${{ secrets.KAKAO_CHANNEL_ID }}
+            NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=${{ secrets.GOOGLE_VERIFICATION }}
+            NEXT_PUBLIC_NAVER_SITE_VERIFICATION=${{ secrets.NAVER_VERIFICATION }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 

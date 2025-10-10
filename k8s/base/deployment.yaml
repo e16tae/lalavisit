@@ -60,9 +60,15 @@ spec:
                   name: lalavisit-secrets
                   key: email-password
             - name: SMTP_HOST
-              value: "smtp.naver.com"
+              valueFrom:
+                secretKeyRef:
+                  name: lalavisit-secrets
+                  key: smtp-host
             - name: SMTP_PORT
-              value: "587"
+              valueFrom:
+                secretKeyRef:
+                  name: lalavisit-secrets
+                  key: smtp-port
             - name: CONTACT_EMAIL
               valueFrom:
                 secretKeyRef:
