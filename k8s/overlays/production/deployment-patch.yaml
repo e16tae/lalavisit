@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: lalavisit
+spec:
+  template:
+    metadata:
+      annotations:
+        # This annotation triggers rolling update when changed by CI/CD
+        # Updated automatically by GitHub Actions on each deployment
+        deployment.kubernetes.io/revision: "1"

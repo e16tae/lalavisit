@@ -70,18 +70,20 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Update image tags in Kustomization
+      - name: Update deployment annotation to trigger rollout
         run: |
           cd k8s/overlays/production
 
-          # Update image tag with commit SHA
-          sed -i "s|newTag:.*|newTag: main-${{ github.sha }}|g" kustomization.yaml
+          # Update deployment annotation with timestamp and commit SHA
+          # This triggers ArgoCD to detect changes and K8s to pull latest image
+          TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          sed -i "s|deployment.kubernetes.io/revision:.*|deployment.kubernetes.io/revision: \"${{ github.sha }}-${TIMESTAMP}\"|g" deployment-patch.yaml
 
           # Commit and push changes
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add kustomization.yaml
-          git commit -m "chore: update production image tag to main-${{ github.sha }}" || echo "No changes to commit"
+          git add deployment-patch.yaml
+          git commit -m "chore: trigger deployment rollout for commit ${{ github.sha }}" || echo "No changes to commit"
           git push
 
   trigger-argocd-sync:
