@@ -15,7 +15,7 @@ replicas:
 
 images:
   - name: lalavisit-frontend
-    newTag: main-faa8795675a9e9bb81383dc6c546a085752dc21d
+    newTag: main-263e0ce698759d8b3b69a60d80454064dbf8c752
 
 patchesStrategicMerge:
   - resources-patch.yaml
