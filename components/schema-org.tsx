@@ -1,3 +1,59 @@
+export function WebSiteSchema() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://www.lalavisit.com/#website",
+    name: "라라재가방문요양센터",
+    alternateName: [
+      "라라재가방문요양센터",
+      "라라",
+      "라라방문",
+      "라라재가",
+      "라라요양",
+      "라라요양센터",
+      "라라방문요양센터",
+      "재가",
+      "재가요양",
+      "재가방문",
+      "방문요양",
+      "방문요양센터",
+      "요양",
+      "요양센터",
+      "재가방문요양센터",
+      "라라재가방문",
+      "송파구 방문요양",
+      "송파구 라라재가",
+      "송파 라라재가",
+      "송파 방문요양",
+      "송파구 요양",
+      "송파구 재가요양",
+      "가락동 방문요양",
+      "가락동 라라재가",
+      "가락동 요양",
+      "가락동 재가요양",
+      "송파 요양센터",
+      "가락동 요양센터",
+      "가족요양",
+      "입주간병",
+      "노인요양",
+      "장기요양"
+    ],
+    url: "https://www.lalavisit.com",
+    description: "믿을 수 있는 방문요양, 가족요양, 입주간병 서비스를 제공하는 전문 요양센터",
+    inLanguage: "ko-KR",
+    publisher: {
+      "@id": "https://www.lalavisit.com/#organization"
+    }
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
 export function LocalBusinessSchema() {
   const schema = {
     "@context": "https://schema.org",
