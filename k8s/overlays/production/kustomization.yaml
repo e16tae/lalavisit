@@ -16,7 +16,7 @@ replicas:
 images:
   - name: lalavisit-frontend
     newName: ghcr.io/e16tae/lalavisit-frontend
-    newTag: main-2d652766e4cf7c04fd1b6c20104b8ab740060de0
+    newTag: main-bbe452315865513ca6cebefbd6927d796c137b16
 
 patchesStrategicMerge:
   - resources-patch.yaml
