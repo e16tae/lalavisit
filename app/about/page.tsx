@@ -1,5 +1,6 @@
 import { MapPin, Phone, Mail, User } from "lucide-react";
 import type { Metadata } from "next";
+import { BreadcrumbSchema } from "@/components/schema-org";
 
 export const metadata: Metadata = {
   title: "센터 소개 - 라라재가방문요양센터",
@@ -20,7 +21,14 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col">
+    <>
+      <BreadcrumbSchema
+        items={[
+          { name: "홈", url: "https://www.lalavisit.com" },
+          { name: "센터 소개", url: "https://www.lalavisit.com/about" },
+        ]}
+      />
+      <div className="flex flex-col">
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary/10 via-white to-secondary/10 py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -164,6 +172,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

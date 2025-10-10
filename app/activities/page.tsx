@@ -1,155 +1,38 @@
-"use client";
+import type { Metadata } from "next";
+import { Suspense } from "react";
+import { ActivitiesClient } from "./activities-client";
+import { ActivitiesSkeleton } from "./activities-skeleton";
+import { BreadcrumbSchema } from "@/components/schema-org";
 
-import { useState } from "react";
-import { Camera, GraduationCap, Calendar, Tag, Clock } from "lucide-react";
-import activitiesData from "@/data/activities.json";
-
-type ActivityType = "field" | "education";
-
-// Note: metadata는 client component에서 export할 수 없으므로
-// 별도의 layout.tsx나 page.tsx로 감싸야 합니다.
-// 현재는 "use client"로 인해 메타데이터를 직접 설정할 수 없습니다.
+export const metadata: Metadata = {
+  title: "활동 갤러리 - 라라재가방문요양센터",
+  description: "현장 활동 사진과 교육 활동 사진을 확인하세요. 요양보호 현장과 전문 교육 과정을 소개합니다.",
+  keywords: "요양활동, 요양교육, 요양보호사교육, 현장사진, 교육사진, 방문요양현장",
+  openGraph: {
+    type: "website",
+    locale: "ko_KR",
+    url: "https://www.lalavisit.com/activities",
+    title: "활동 갤러리 - 라라재가방문요양센터",
+    description: "요양 서비스 현장 활동과 전문 교육 활동을 사진으로 만나보세요",
+    siteName: "라라재가방문요양센터",
+  },
+  alternates: {
+    canonical: "https://www.lalavisit.com/activities",
+  },
+};
 
 export default function ActivitiesPage() {
-  const [activeTab, setActiveTab] = useState<ActivityType>("field");
-
-  const currentActivities = activeTab === "field" ? activitiesData.field : activitiesData.education;
-
   return (
-    <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary/10 via-white to-secondary/10 py-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">
-            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              활동 갤러리
-            </span>
-          </h1>
-          <p className="text-xl text-gray-600 text-center">
-            현장 활동과 교육 활동을 소개합니다
-          </p>
-        </div>
-      </section>
-
-      {/* Tabs */}
-      <section className="py-8 bg-white sticky top-16 z-30 border-b">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-center gap-4">
-            <button
-              onClick={() => setActiveTab("field")}
-              className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all ${
-                activeTab === "field"
-                  ? "bg-gradient-to-r from-primary to-secondary text-white shadow-lg"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-              }`}
-            >
-              <Camera className="w-5 h-5" />
-              현장 사진
-            </button>
-            <button
-              onClick={() => setActiveTab("education")}
-              className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all ${
-                activeTab === "education"
-                  ? "bg-gradient-to-r from-primary to-secondary text-white shadow-lg"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-              }`}
-            >
-              <GraduationCap className="w-5 h-5" />
-              교육 사진
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Gallery */}
-      <section className="py-12 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {currentActivities.map((activity) => (
-              <div
-                key={activity.id}
-                className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
-              >
-                <div className="relative aspect-video bg-gray-100">
-                  {/* 이미지 영역 - 실제 이미지가 없을 경우 플레이스홀더 표시 */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/10 to-secondary/10">
-                    {activeTab === "field" ? (
-                      <Camera className="w-16 h-16 text-primary/30" />
-                    ) : (
-                      <GraduationCap className="w-16 h-16 text-secondary/30" />
-                    )}
-                  </div>
-                  {/* 실제 이미지를 추가하려면 아래 주석을 해제하세요
-                  <Image
-                    src={activity.image}
-                    alt={activity.title}
-                    fill
-                    className="object-cover"
-                  />
-                  */}
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
-                    {activity.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4">{activity.description}</p>
-
-                  <div className="space-y-2 text-sm">
-                    <div className="flex items-center gap-2 text-gray-500">
-                      <Calendar className="w-4 h-4" />
-                      <span>{new Date(activity.date).toLocaleDateString("ko-KR")}</span>
-                    </div>
-
-                    {activeTab === "field" && "careGrade" in activity && (
-                      <>
-                        <div className="flex items-center gap-2 text-gray-500">
-                          <Tag className="w-4 h-4" />
-                          <span>요양등급: {activity.careGrade}</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-gray-500">
-                          <Tag className="w-4 h-4" />
-                          <span>서비스: {activity.service}</span>
-                        </div>
-                      </>
-                    )}
-
-                    {activeTab === "education" && "educationType" in activity && (
-                      <>
-                        <div className="flex items-center gap-2 text-gray-500">
-                          <Tag className="w-4 h-4" />
-                          <span>교육 유형: {activity.educationType}</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-gray-500">
-                          <Clock className="w-4 h-4" />
-                          <span>교육 시간: {activity.hours}</span>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {currentActivities.length === 0 && (
-            <div className="text-center py-20">
-              <div className="inline-block p-8 bg-gray-50 rounded-full mb-6">
-                {activeTab === "field" ? (
-                  <Camera className="w-16 h-16 text-gray-300" />
-                ) : (
-                  <GraduationCap className="w-16 h-16 text-gray-300" />
-                )}
-              </div>
-              <h3 className="text-xl font-semibold text-gray-700 mb-2">
-                등록된 활동이 없습니다
-              </h3>
-              <p className="text-gray-500">
-                곧 새로운 활동 사진이 업데이트될 예정입니다.
-              </p>
-            </div>
-          )}
-        </div>
-      </section>
-    </div>
+    <>
+      <BreadcrumbSchema
+        items={[
+          { name: "홈", url: "https://www.lalavisit.com" },
+          { name: "활동 갤러리", url: "https://www.lalavisit.com/activities" },
+        ]}
+      />
+      <Suspense fallback={<ActivitiesSkeleton />}>
+        <ActivitiesClient />
+      </Suspense>
+    </>
   );
 }

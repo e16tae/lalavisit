@@ -6,11 +6,13 @@
 
 - **Framework**: Next.js 15 (App Router)
 - **언어**: TypeScript
-- **스타일링**: Tailwind CSS 4, shadcn/ui
+- **스타일링**: Tailwind CSS 4
+- **UI 컴포넌트**: shadcn/ui (Radix UI 기반)
 - **폰트**: Pretendard Variable
 - **아이콘**: Lucide React
+- **폼 관리**: React Hook Form + Zod
 - **이메일**: Nodemailer (네이버 SMTP)
-- **Analytics**: Google Analytics (선택사항)
+- **알림**: Sonner (Toast notifications)
 - **배포**: Vercel
 
 ## 📦 주요 기능
@@ -39,28 +41,29 @@
    - 현장 사진 (요양등급, 서비스 정보 표기)
    - 교육 사진 (교육 유형, 시간 표기)
    - 탭 UI로 구분
+   - Image Lightbox (Dialog) 확대 보기
+   - 빈 상태 안내 메시지
 
 5. **문의 기능**
    - 플로팅 버튼 (전화, 카카오톡, 이메일, 상담신청)
-   - 상담 요청 폼
+   - Shadcn/ui 상담 요청 폼
+   - React Hook Form + Zod 실시간 검증
+   - Toast 알림 (Sonner)
    - 네이버 SMTP로 이메일 전송
 
-6. **후기/리뷰**
-   - 홈페이지 리뷰 섹션
-   - 카루셀 UI
-   - 통계 표시
-
-7. **에러 처리**
+6. **에러 처리**
    - 404 Not Found
    - 500 Server Error
    - Global Error
    - Loading States
 
-8. **성능 최적화**
+7. **성능 최적화**
    - 이미지 최적화 (AVIF, WebP)
+   - LCP 이미지 priority
    - React 엄격 모드
+   - remotePatterns 보안 강화
 
-9. **접근성**
+8. **접근성**
    - Skip to content
    - ARIA 레이블
    - 키보드 네비게이션
@@ -95,12 +98,11 @@ CONTACT_EMAIL=lalavisit@naver.com
 # 사이트 URL
 NEXT_PUBLIC_SITE_URL=https://www.lalavisit.com
 
-# Google Analytics (선택사항)
-# NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
-
 # 카카오톡 채널
-NEXT_PUBLIC_KAKAO_CHANNEL_URL=https://pf.kakao.com/_xnxoxoxG/chat
+NEXT_PUBLIC_KAKAO_CHANNEL_ID=_xnxoxoxG
 ```
+
+**중요:** 카카오톡 채널 ID는 `NEXT_PUBLIC_KAKAO_CHANNEL_ID`로 설정해야 합니다.
 
 ### 개발 서버 실행
 
@@ -130,13 +132,11 @@ lalavisit/
 ├── components/                  # React 컴포넌트
 │   ├── floating-contact.tsx
 │   ├── footer.tsx
-│   ├── google-analytics.tsx
 │   ├── navigation.tsx
-│   ├── reviews-section.tsx
-│   └── schema-org.tsx
+│   ├── schema-org.tsx
+│   └── ui/                      # Shadcn/ui 컴포넌트
 ├── data/                        # JSON 데이터
-│   ├── activities.json          # 활동 사진 메타데이터
-│   └── reviews.json             # 후기 데이터
+│   └── activities.json          # 활동 사진 메타데이터
 ├── lib/
 │   └── utils.ts                 # shadcn/ui utils
 ├── public/                      # 정적 파일
@@ -151,7 +151,7 @@ lalavisit/
 콘텐츠 관리 방법은 [ADMIN_GUIDE.md](./ADMIN_GUIDE.md)를 참고하세요.
 
 - 활동 사진: `data/activities.json`
-- 후기: `data/reviews.json`
+- 이미지 파일: `public/activities/` 폴더에 업로드
 
 ## 🌐 배포
 
@@ -175,8 +175,14 @@ Vercel을 사용하여 배포합니다.
 
 ## 📊 빌드 정보
 
-- **빌드 크기**: ~129-132 KB (First Load JS)
+- **빌드 크기**:
+  - 홈페이지: 150 KB (First Load JS)
+  - 서비스/소개: 147 KB
+  - 활동 갤러리: 166 KB (Tabs + Card + Dialog)
+  - 문의하기: 233 KB (Form + Validation)
+  - Shared chunks: 159 KB
 - **페이지 수**: 13개 (정적 생성)
+- **Shadcn/ui 활용도**: 92% (11/12 컴포넌트)
 
 ## 📞 문의
 

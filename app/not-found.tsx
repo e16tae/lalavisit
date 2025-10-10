@@ -51,10 +51,10 @@ export default function NotFound() {
                 서비스 안내
               </Link>
               <Link
-                href="/faq"
+                href="/activities"
                 className="text-sm px-4 py-2 bg-white rounded-full hover:bg-gray-50 border border-gray-200 transition-colors"
               >
-                자주 묻는 질문
+                활동 갤러리
               </Link>
               <Link
                 href="/contact"

@@ -42,3 +42,9 @@ yarn-error.log*
 next-env.d.ts
 # 환경 변수 파일
 /.env*.local
+
+# Claude Code 프로젝트 설정
+.claude.json
+
+# Kubernetes secrets (never commit actual secrets)
+# k8s/base/secrets.yaml should only contain placeholders

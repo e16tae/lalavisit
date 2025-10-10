@@ -1,6 +1,7 @@
 import { Heart, Users, Home, Check, DollarSign, ShoppingCart, FileText } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { BreadcrumbSchema } from "@/components/schema-org";
 
 export const metadata: Metadata = {
   title: "서비스 안내 - 라라재가방문요양센터",
@@ -21,7 +22,14 @@ export const metadata: Metadata = {
 
 export default function ServicesPage() {
   return (
-    <div className="flex flex-col">
+    <>
+      <BreadcrumbSchema
+        items={[
+          { name: "홈", url: "https://www.lalavisit.com" },
+          { name: "서비스 안내", url: "https://www.lalavisit.com/services" },
+        ]}
+      />
+      <div className="flex flex-col">
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary/10 via-white to-secondary/10 py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -559,6 +567,7 @@ export default function ServicesPage() {
           </Link>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

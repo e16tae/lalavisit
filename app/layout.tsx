@@ -7,6 +7,9 @@ const pretendard = localFont({
   variable: "--font-pretendard",
   display: "swap",
   weight: "45 920",
+  preload: true,
+  fallback: ["system-ui", "-apple-system", "sans-serif"],
+  adjustFontFallback: "Arial",
 });
 
 import { Navigation } from "@/components/navigation";
@@ -14,6 +17,8 @@ import { FloatingContact } from "@/components/floating-contact";
 import { Footer } from "@/components/footer";
 import { LocalBusinessSchema, ServiceSchema } from "@/components/schema-org";
 import { SkipToContent } from "@/components/skip-to-content";
+import { Toaster } from "@/components/ui/sonner";
+import { WebVitals } from "@/components/web-vitals";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.lalavisit.com"),
@@ -51,8 +56,12 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/logo.svg",
-    apple: "/logo.svg",
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    apple: [
+      { url: '/apple-icon.svg', type: 'image/svg+xml' },
+    ],
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
@@ -77,6 +86,7 @@ export default function RootLayout({
         className={`${pretendard.variable} antialiased`}
         style={{ fontFamily: 'var(--font-pretendard)' }}
       >
+        <WebVitals />
         <SkipToContent />
         <Navigation />
         <main id="main-content" className="pt-16 min-h-screen" tabIndex={-1}>
@@ -84,6 +94,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <FloatingContact />
+        <Toaster />
       </body>
     </html>
   );

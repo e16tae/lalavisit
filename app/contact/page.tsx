@@ -1,22 +1,22 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Phone, MessageSquare, Mail, Send, Clock } from "lucide-react";
+import { useEffect } from "react";
+import dynamic from "next/dynamic";
+import { Phone, MessageSquare, Mail, Clock } from "lucide-react";
 import { useSearchParams } from "next/navigation";
+import { ContactFormSkeleton } from "./contact-form-skeleton";
+
+// Dynamic import for ContactForm (reduces initial bundle size)
+const ContactForm = dynamic(() => import("./contact-form").then((mod) => ({ default: mod.ContactForm })), {
+  loading: () => <ContactFormSkeleton />,
+  ssr: false,
+});
 
 export default function ContactPage() {
   const searchParams = useSearchParams();
   const kakaoChannelId = process.env.NEXT_PUBLIC_KAKAO_CHANNEL_ID || "_xnxoxoxG";
   const kakaoAddUrl = `https://pf.kakao.com/${kakaoChannelId}/friend`;
   const kakaoChatUrl = `https://pf.kakao.com/${kakaoChannelId}/chat`;
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    service: "방문요양",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
   useEffect(() => {
     const action = searchParams.get("action");
@@ -41,47 +41,6 @@ export default function ContactPage() {
       }
     }
   }, [searchParams]);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus("idle");
-
-    try {
-      // API 호출
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setSubmitStatus("success");
-        setFormData({
-          name: "",
-          phone: "",
-          service: "방문요양",
-          message: "",
-        });
-      } else {
-        setSubmitStatus("error");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      setSubmitStatus("error");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
 
   return (
     <div className="flex flex-col">
@@ -200,102 +159,7 @@ export default function ContactPage() {
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl shadow-lg">
-              <div className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
-                    성함 <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="성함을 입력해주세요"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                    연락처 <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    required
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="010-0000-0000"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="service" className="block text-sm font-semibold text-gray-700 mb-2">
-                    문의 서비스 <span className="text-red-500">*</span>
-                  </label>
-                  <select
-                    id="service"
-                    name="service"
-                    required
-                    value={formData.service}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                  >
-                    <option value="방문요양">방문요양</option>
-                    <option value="가족요양">가족요양</option>
-                    <option value="입주간병">입주간병</option>
-                    <option value="기타">기타</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
-                    문의 내용
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={5}
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary resize-none"
-                    placeholder="문의하실 내용을 자유롭게 작성해주세요"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-full font-semibold hover:shadow-lg transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                >
-                  {isSubmitting ? (
-                    "전송 중..."
-                  ) : (
-                    <>
-                      상담 신청하기
-                      <Send className="w-5 h-5" />
-                    </>
-                  )}
-                </button>
-
-                {submitStatus === "success" && (
-                  <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-green-700 text-center">
-                    상담 신청이 완료되었습니다. 빠른 시일 내에 연락드리겠습니다.
-                  </div>
-                )}
-
-                {submitStatus === "error" && (
-                  <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-center">
-                    전송 중 오류가 발생했습니다. 다시 시도해주세요.
-                  </div>
-                )}
-              </div>
-            </form>
+            <ContactForm />
           </div>
         </div>
       </section>

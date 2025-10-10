@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: lalavisit-production
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: lalavisit
+    environment: production
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/e16tae/lalavisit.git  # CHANGE THIS to your repo URL
+    targetRevision: main
+    path: k8s/overlays/production
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: lalavisit
+
+  syncPolicy:
+    automated:
+      prune: true       # Remove resources when removed from Git
+      selfHeal: true    # Automatically sync when cluster state drifts from Git
+      allowEmpty: false
+    syncOptions:
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+
+  # Health assessment
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jsonPointers:
+        - /spec/replicas  # Ignore HPA-managed replicas

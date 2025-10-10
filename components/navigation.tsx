@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,8 +21,8 @@ export function Navigation() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center space-x-2">
-            <Image src="/logo.svg" alt="라라재가방문요양 로고" width={40} height={40} />
-            <span className="text-xl font-bold bg-gradient-to-r from-[#22BBB4] to-[#00ACE2] bg-clip-text text-transparent">
+            <Image src="/logo.svg" alt="라라재가방문요양 로고" width={40} height={40} priority />
+            <span className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
               라라재가방문요양
             </span>
           </Link>
@@ -40,19 +41,24 @@ export function Navigation() {
           </div>
 
           {/* Mobile menu button */}
-          <button
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100"
+            className="md:hidden"
+            aria-label={isOpen ? "메뉴 닫기" : "메뉴 열기"}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          </Button>
         </div>
       </div>
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="md:hidden border-t">
-          <div className="container mx-auto px-4 py-4 space-y-2">
+        <div id="mobile-menu" className="md:hidden border-t">
+          <nav className="container mx-auto px-4 py-4 space-y-2" aria-label="모바일 메뉴">
             {navItems.map((item) => (
               <Link
                 key={item.name}
@@ -63,7 +69,7 @@ export function Navigation() {
                 {item.name}
               </Link>
             ))}
-          </div>
+          </nav>
         </div>
       )}
     </nav>

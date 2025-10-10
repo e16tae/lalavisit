@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import reviews from "@/data/reviews.json";
 
 export function ReviewsSection() {
@@ -89,67 +90,46 @@ export function ReviewsSection() {
           {/* Navigation Buttons */}
           {totalPages > 1 && (
             <div className="flex items-center justify-center gap-4">
-              <button
+              <Button
+                variant="outline"
+                size="icon"
                 onClick={prevSlide}
-                className="p-3 rounded-full bg-white shadow-md hover:shadow-lg transition-all hover:bg-primary hover:text-white"
+                className="rounded-full bg-white shadow-md hover:shadow-lg hover:bg-primary hover:text-white"
                 aria-label="이전 후기"
               >
                 <ChevronLeft className="w-6 h-6" />
-              </button>
+              </Button>
 
               <div className="flex gap-2">
                 {[...Array(totalPages)].map((_, i) => (
-                  <button
+                  <Button
                     key={i}
+                    variant="ghost"
+                    size="sm"
                     onClick={() => setCurrentIndex(i)}
-                    className={`w-3 h-3 rounded-full transition-all ${
+                    className={`h-3 rounded-full p-0 hover:bg-transparent transition-all ${
                       i === currentIndex
                         ? "bg-primary w-8"
-                        : "bg-gray-300 hover:bg-gray-400"
+                        : "bg-gray-300 hover:bg-gray-400 w-3"
                     }`}
-                    aria-label={`${i + 1}번째 페이지`}
+                    aria-label={`${totalPages}개 중 ${i + 1}번째 후기 페이지로 이동`}
                   />
                 ))}
               </div>
 
-              <button
+              <Button
+                variant="outline"
+                size="icon"
                 onClick={nextSlide}
-                className="p-3 rounded-full bg-white shadow-md hover:shadow-lg transition-all hover:bg-primary hover:text-white"
+                className="rounded-full bg-white shadow-md hover:shadow-lg hover:bg-primary hover:text-white"
                 aria-label="다음 후기"
               >
                 <ChevronRight className="w-6 h-6" />
-              </button>
+              </Button>
             </div>
           )}
         </div>
 
-        {/* Stats */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-          <div className="text-center p-6 bg-white rounded-xl shadow-md">
-            <div className="text-3xl font-bold text-primary mb-2">
-              {reviews.reviews.length}+
-            </div>
-            <div className="text-sm text-gray-600">만족 후기</div>
-          </div>
-          <div className="text-center p-6 bg-white rounded-xl shadow-md">
-            <div className="text-3xl font-bold text-secondary mb-2">
-              4.9
-            </div>
-            <div className="text-sm text-gray-600">평균 평점</div>
-          </div>
-          <div className="text-center p-6 bg-white rounded-xl shadow-md">
-            <div className="text-3xl font-bold text-primary mb-2">
-              98%
-            </div>
-            <div className="text-sm text-gray-600">재이용 의향</div>
-          </div>
-          <div className="text-center p-6 bg-white rounded-xl shadow-md">
-            <div className="text-3xl font-bold text-secondary mb-2">
-              100%
-            </div>
-            <div className="text-sm text-gray-600">추천 의향</div>
-          </div>
-        </div>
       </div>
     </section>
   );
