@@ -523,7 +523,7 @@ export default function ServicesPage() {
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span>자세한 비용은 무료 상담을 통해 안내</span>
+                    <span>자세한 비용은 상담을 통해 안내</span>
                   </li>
                 </ul>
               </div>
@@ -535,7 +535,7 @@ export default function ServicesPage() {
                 <li>• 위 금액은 2025년 1월 기준이며, 보건복지부 고시에 따라 변경될 수 있습니다.</li>
                 <li>• 월 한도액 초과 시 전액 본인부담으로 이용 가능합니다.</li>
                 <li>• 지역, 시간대(야간/공휴일)에 따라 가산금이 추가될 수 있습니다.</li>
-                <li>• 정확한 비용 및 이용 계획은 무료 상담을 통해 안내해 드립니다.</li>
+                <li>• 정확한 비용 및 이용 계획은 상담을 통해 안내해 드립니다.</li>
               </ul>
             </div>
           </div>
@@ -654,7 +654,7 @@ export default function ServicesPage() {
             href="/contact"
             className="inline-block bg-white text-primary px-8 py-4 rounded-full font-semibold hover:shadow-2xl transition-all hover:scale-105"
           >
-            무료 상담 신청하기
+            상담 신청하기
           </Link>
         </div>
       </section>

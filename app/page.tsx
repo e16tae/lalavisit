@@ -63,7 +63,7 @@ export default function HomePage() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-all duration-300 hover:shadow-xl"
+                className="border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-1"
               >
                 <Link href="/services" className="inline-flex items-center gap-2">
                   서비스 알아보기
@@ -170,7 +170,7 @@ export default function HomePage() {
           </p>
           <Button asChild size="lg" className="bg-white text-primary rounded-full hover:shadow-2xl hover:scale-105">
             <Link href="/contact" className="inline-flex items-center gap-2">
-              무료 상담 신청
+              상담 신청
               <ArrowRight className="w-5 h-5" />
             </Link>
           </Button>
