@@ -168,7 +168,7 @@ export default function HomePage() {
           <p className="text-xl mb-8 opacity-90">
             지금 바로 상담을 신청하세요. 친절하게 안내해드리겠습니다.
           </p>
-          <Button asChild size="lg" className="bg-white text-primary rounded-full hover:shadow-2xl hover:scale-105">
+          <Button asChild size="lg" className="bg-white text-primary rounded-full hover:bg-gradient-to-r hover:from-secondary hover:to-primary hover:text-white hover:shadow-2xl hover:scale-105 transition-all duration-300">
             <Link href="/contact" className="inline-flex items-center gap-2">
               상담 신청
               <ArrowRight className="w-5 h-5" />
