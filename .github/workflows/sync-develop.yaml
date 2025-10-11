@@ -1,0 +1,39 @@
+name: Sync Develop with Main
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'k8s/overlays/production/deployment-patch.yaml'
+
+jobs:
+  sync-develop:
+    name: Sync develop branch
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 0
+
+      - name: Merge main into develop
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+          # Fetch latest main
+          git fetch origin main
+
+          # Merge main into develop
+          git merge origin/main -m "chore: sync K8s manifests from main [skip ci]" || {
+            echo "⚠️ Merge conflict detected. Manual resolution required."
+            exit 0
+          }
+
+          # Push to develop
+          git push origin develop
