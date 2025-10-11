@@ -4,7 +4,7 @@ import { BreadcrumbSchema } from "@/components/schema-org";
 
 export const metadata: Metadata = {
   title: "센터 소개 - 라라재가방문요양센터",
-  description: "서울 송파구 가락동 위치. 센터장 이경빈. 전화: 02-430-2351, 010-9573-2351. 가락시장역 6번 출구 도보 5분. 전문 요양보호사와 사회복지사가 함께합니다.",
+  description: "서울 송파구 가락동 위치. 대표자 이경빈. 전화: 02-430-2351, 010-9573-2351. 가락시장역 6번 출구 도보 5분. 전문 요양보호사와 사회복지사가 함께합니다.",
   keywords: "송파구요양센터, 가락동요양센터, 요양센터위치, 요양센터전화번호, 가락시장역요양센터",
   openGraph: {
     type: "website",
@@ -64,7 +64,7 @@ export default function AboutPage() {
                 언제든지 편안하게 문의해 주시면 친절하게 상담해 드리겠습니다.
               </p>
               <p className="text-right font-semibold mt-8">
-                라라재가방문요양센터 센터장 올림
+                라라재가방문요양센터 대표자 올림
               </p>
             </div>
           </div>
@@ -75,7 +75,7 @@ export default function AboutPage() {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-center">센터장 프로필</h2>
+            <h2 className="text-3xl font-bold mb-8 text-center">대표자 프로필</h2>
             <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
               <div className="flex flex-col md:flex-row gap-8 items-start">
                 <div className="flex-shrink-0">
@@ -84,7 +84,7 @@ export default function AboutPage() {
                   </div>
                 </div>
                 <div className="flex-1 space-y-4">
-                  <h3 className="text-2xl font-bold">이경빈 센터장</h3>
+                  <h3 className="text-2xl font-bold">이경빈 대표자</h3>
                   <div className="space-y-2 text-gray-700">
                     <p><strong>경력:</strong></p>
                     <ul className="list-disc list-inside space-y-1 ml-4">
@@ -130,7 +130,7 @@ export default function AboutPage() {
                   <h3 className="font-semibold mb-2">전화번호</h3>
                   <p className="text-sm text-gray-600">
                     센터: 02-430-2351<br />
-                    센터장: 010-9573-2351
+                    대표자: 010-9573-2351
                   </p>
                 </div>
               </div>

@@ -85,7 +85,7 @@ export default function ContactPage() {
                   </span>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600 mb-1">센터장</p>
+                  <p className="text-sm text-gray-600 mb-1">대표자</p>
                   <a
                     href="tel:010-9573-2351"
                     className="text-lg font-semibold text-primary hover:underline"
@@ -179,7 +179,7 @@ export default function ContactPage() {
                       언제든지 편하신 시간에 연락 주시면 친절하게 상담해 드리겠습니다.
                     </p>
                     <p className="text-sm text-gray-600">
-                      ※ 긴급한 경우 센터장 휴대폰(010-9573-2351)으로 연락 주시기 바랍니다.
+                      ※ 긴급한 경우 대표자 휴대폰(010-9573-2351)으로 연락 주시기 바랍니다.
                     </p>
                   </div>
                 </div>

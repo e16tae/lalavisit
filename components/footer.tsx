@@ -76,7 +76,7 @@ export function Footer() {
                 <Phone className="w-4 h-4 text-primary flex-shrink-0" />
                 <div>
                   <div>센터: 02-430-2351</div>
-                  <div className="text-xs text-gray-500">센터장: 010-9573-2351</div>
+                  <div className="text-xs text-gray-500">대표자: 010-9573-2351</div>
                 </div>
               </li>
               <li className="flex items-center gap-3 text-gray-600">
