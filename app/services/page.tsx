@@ -336,66 +336,147 @@ export default function ServicesPage() {
               <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center">
                 <DollarSign className="w-8 h-8 text-secondary" />
               </div>
-              <h2 className="text-3xl font-bold">2025년 방문요양 수가</h2>
+              <h2 className="text-3xl font-bold">2025년 방문요양 이용요금</h2>
             </div>
 
             <div className="prose prose-lg max-w-none mb-8">
               <p className="text-gray-700">
-                2025년 장기요양 급여비용 및 본인부담금 안내입니다.
+                2025년 장기요양 급여비용 및 본인부담금 안내입니다. (평균 3.93% 인상)
                 실제 이용 시간과 등급에 따라 본인부담금이 달라집니다.
               </p>
             </div>
 
+            {/* 시간별 이용요금 */}
+            <div className="bg-white rounded-xl shadow-sm overflow-hidden mb-8">
+              <div className="bg-gradient-to-r from-primary/10 to-secondary/10 px-6 py-4">
+                <h3 className="font-semibold text-lg">방문요양 시간별 이용요금 (2025년)</h3>
+                <p className="text-sm text-gray-600 mt-1">총 재가급여비용 및 본인부담금</p>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-6 py-3 text-left font-semibold">이용시간</th>
+                      <th className="px-6 py-3 text-right font-semibold">총 비용</th>
+                      <th className="px-6 py-3 text-right font-semibold">본인부담금 (15%)</th>
+                      <th className="px-6 py-3 text-right font-semibold">본인부담금 (9%)</th>
+                      <th className="px-6 py-3 text-right font-semibold">본인부담금 (6%)</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    <tr className="hover:bg-gray-50">
+                      <td className="px-6 py-4 font-medium">30분</td>
+                      <td className="px-6 py-4 text-right">16,940원</td>
+                      <td className="px-6 py-4 text-right text-secondary font-semibold">2,541원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">1,525원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">1,016원</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50">
+                      <td className="px-6 py-4 font-medium">60분</td>
+                      <td className="px-6 py-4 text-right">24,580원</td>
+                      <td className="px-6 py-4 text-right text-secondary font-semibold">3,687원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">2,212원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">1,475원</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50">
+                      <td className="px-6 py-4 font-medium">90분</td>
+                      <td className="px-6 py-4 text-right">33,120원</td>
+                      <td className="px-6 py-4 text-right text-secondary font-semibold">4,968원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">2,981원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">1,987원</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50">
+                      <td className="px-6 py-4 font-medium">120분</td>
+                      <td className="px-6 py-4 text-right">42,160원</td>
+                      <td className="px-6 py-4 text-right text-secondary font-semibold">6,324원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">3,794원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">2,530원</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50">
+                      <td className="px-6 py-4 font-medium">150분</td>
+                      <td className="px-6 py-4 text-right">49,160원</td>
+                      <td className="px-6 py-4 text-right text-secondary font-semibold">7,374원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">4,424원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">2,950원</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50">
+                      <td className="px-6 py-4 font-medium">180분</td>
+                      <td className="px-6 py-4 text-right">55,350원</td>
+                      <td className="px-6 py-4 text-right text-secondary font-semibold">8,303원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">4,982원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">3,321원</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50">
+                      <td className="px-6 py-4 font-medium">210분</td>
+                      <td className="px-6 py-4 text-right">61,670원</td>
+                      <td className="px-6 py-4 text-right text-secondary font-semibold">9,251원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">5,550원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">3,700원</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50">
+                      <td className="px-6 py-4 font-medium">240분</td>
+                      <td className="px-6 py-4 text-right">68,030원</td>
+                      <td className="px-6 py-4 text-right text-secondary font-semibold">10,205원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">6,118원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">4,082원</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* 등급별 월 한도액 */}
             <div className="bg-white rounded-xl shadow-sm overflow-hidden mb-8">
               <div className="bg-gradient-to-r from-secondary/10 to-primary/10 px-6 py-4">
-                <h3 className="font-semibold text-lg">방문요양 급여비용 (60분 기준)</h3>
+                <h3 className="font-semibold text-lg">등급별 재가급여 월 한도액 (2025년)</h3>
+                <p className="text-sm text-gray-600 mt-1">재가서비스 이용 시 월 최대 한도액</p>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead className="bg-gray-50">
                     <tr>
                       <th className="px-6 py-3 text-left font-semibold">등급</th>
-                      <th className="px-6 py-3 text-right font-semibold">총 비용</th>
+                      <th className="px-6 py-3 text-right font-semibold">월 한도액</th>
                       <th className="px-6 py-3 text-right font-semibold">본인부담금 (15%)</th>
-                      <th className="px-6 py-3 text-right font-semibold">본인부담금 (경감 6%)</th>
+                      <th className="px-6 py-3 text-right font-semibold">최대 이용시간 (120분 기준)</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y">
                     <tr className="hover:bg-gray-50">
                       <td className="px-6 py-4 font-medium">1등급</td>
-                      <td className="px-6 py-4 text-right">20,480원</td>
-                      <td className="px-6 py-4 text-right text-secondary font-semibold">3,072원</td>
-                      <td className="px-6 py-4 text-right text-gray-600">1,229원</td>
+                      <td className="px-6 py-4 text-right">2,306,400원</td>
+                      <td className="px-6 py-4 text-right text-secondary font-semibold">345,960원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">약 54.7회</td>
                     </tr>
                     <tr className="hover:bg-gray-50">
                       <td className="px-6 py-4 font-medium">2등급</td>
-                      <td className="px-6 py-4 text-right">19,460원</td>
-                      <td className="px-6 py-4 text-right text-secondary font-semibold">2,919원</td>
-                      <td className="px-6 py-4 text-right text-gray-600">1,168원</td>
+                      <td className="px-6 py-4 text-right">2,083,400원</td>
+                      <td className="px-6 py-4 text-right text-secondary font-semibold">312,510원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">약 49.4회</td>
                     </tr>
                     <tr className="hover:bg-gray-50">
                       <td className="px-6 py-4 font-medium">3등급</td>
-                      <td className="px-6 py-4 text-right">18,430원</td>
-                      <td className="px-6 py-4 text-right text-secondary font-semibold">2,765원</td>
-                      <td className="px-6 py-4 text-right text-gray-600">1,106원</td>
+                      <td className="px-6 py-4 text-right">1,485,700원</td>
+                      <td className="px-6 py-4 text-right text-secondary font-semibold">222,855원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">약 35.2회</td>
                     </tr>
                     <tr className="hover:bg-gray-50">
                       <td className="px-6 py-4 font-medium">4등급</td>
-                      <td className="px-6 py-4 text-right">17,400원</td>
-                      <td className="px-6 py-4 text-right text-secondary font-semibold">2,610원</td>
-                      <td className="px-6 py-4 text-right text-gray-600">1,044원</td>
+                      <td className="px-6 py-4 text-right">1,370,600원</td>
+                      <td className="px-6 py-4 text-right text-secondary font-semibold">205,590원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">약 32.5회</td>
                     </tr>
                     <tr className="hover:bg-gray-50">
                       <td className="px-6 py-4 font-medium">5등급</td>
-                      <td className="px-6 py-4 text-right">16,370원</td>
-                      <td className="px-6 py-4 text-right text-secondary font-semibold">2,456원</td>
-                      <td className="px-6 py-4 text-right text-gray-600">982원</td>
+                      <td className="px-6 py-4 text-right">1,177,000원</td>
+                      <td className="px-6 py-4 text-right text-secondary font-semibold">176,550원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">약 27.9회</td>
                     </tr>
                     <tr className="hover:bg-gray-50">
                       <td className="px-6 py-4 font-medium">인지지원등급</td>
-                      <td className="px-6 py-4 text-right">16,370원</td>
-                      <td className="px-6 py-4 text-right text-secondary font-semibold">2,456원</td>
-                      <td className="px-6 py-4 text-right text-gray-600">982원</td>
+                      <td className="px-6 py-4 text-right">657,400원</td>
+                      <td className="px-6 py-4 text-right text-secondary font-semibold">98,610원</td>
+                      <td className="px-6 py-4 text-right text-gray-600">약 15.6회</td>
                     </tr>
                   </tbody>
                 </table>
@@ -404,37 +485,45 @@ export default function ServicesPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div className="bg-secondary/5 p-6 rounded-xl border-l-4 border-secondary">
-                <h3 className="font-semibold mb-3">본인부담금 경감 대상</h3>
+                <h3 className="font-semibold mb-3">본인부담금 구분</h3>
                 <ul className="space-y-2 text-sm text-gray-700">
                   <li className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-secondary flex-shrink-0" />
-                    <span>의료급여 수급자: 무료</span>
+                    <span><strong>15%:</strong> 일반 수급자</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-secondary flex-shrink-0" />
-                    <span>기초생활수급자: 본인부담금 전액 면제</span>
+                    <span><strong>9%:</strong> 차상위계층 (40% 경감)</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-secondary flex-shrink-0" />
-                    <span>차상위계층: 본인부담금 6% (60% 경감)</span>
+                    <span><strong>6%:</strong> 차상위계층 (60% 경감)</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-secondary flex-shrink-0" />
+                    <span><strong>0%:</strong> 기초생활수급자, 의료급여 수급자</span>
                   </li>
                 </ul>
               </div>
 
               <div className="bg-primary/5 p-6 rounded-xl border-l-4 border-primary">
-                <h3 className="font-semibold mb-3">이용 시간별 비용</h3>
+                <h3 className="font-semibold mb-3">이용 안내</h3>
                 <ul className="space-y-2 text-sm text-gray-700">
                   <li className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span>30분: 60분 비용의 50%</span>
+                    <span>월 한도액 범위 내에서 자유롭게 이용 가능</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span>90분: 60분 비용 × 1.5배</span>
+                    <span>주말 및 공휴일 가산 비용 별도 적용</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span>120분: 60분 비용 × 2배</span>
+                    <span>지역 및 시간대에 따른 가산 가능</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-primary flex-shrink-0" />
+                    <span>자세한 비용은 무료 상담을 통해 안내</span>
                   </li>
                 </ul>
               </div>
@@ -442,10 +531,12 @@ export default function ServicesPage() {
 
             <div className="bg-yellow-50 p-6 rounded-xl border-l-4 border-yellow-400">
               <h3 className="font-semibold mb-2 text-yellow-800">안내사항</h3>
-              <p className="text-sm text-yellow-700">
-                위 비용은 2025년 기준이며, 지역 및 시간대에 따라 가산이 적용될 수 있습니다.
-                정확한 비용은 상담을 통해 안내해 드립니다.
-              </p>
+              <ul className="space-y-1 text-sm text-yellow-700">
+                <li>• 위 금액은 2025년 1월 기준이며, 보건복지부 고시에 따라 변경될 수 있습니다.</li>
+                <li>• 월 한도액 초과 시 전액 본인부담으로 이용 가능합니다.</li>
+                <li>• 지역, 시간대(야간/공휴일)에 따라 가산금이 추가될 수 있습니다.</li>
+                <li>• 정확한 비용 및 이용 계획은 무료 상담을 통해 안내해 드립니다.</li>
+              </ul>
             </div>
           </div>
         </div>
