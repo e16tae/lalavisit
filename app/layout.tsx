@@ -15,7 +15,7 @@ const pretendard = localFont({
 import { Navigation } from "@/components/navigation";
 import { FloatingContact } from "@/components/floating-contact";
 import { Footer } from "@/components/footer";
-import { WebSiteSchema, LocalBusinessSchema, ServiceSchema } from "@/components/schema-org";
+import { WebSiteSchema, LocalBusinessSchema, ServiceSchema, OrganizationSchema, FAQPageSchema } from "@/components/schema-org";
 import { SkipToContent } from "@/components/skip-to-content";
 import { Toaster } from "@/components/ui/sonner";
 import { WebVitals } from "@/components/web-vitals";
@@ -80,8 +80,10 @@ export default function RootLayout({
     <html lang="ko">
       <head>
         <WebSiteSchema />
+        <OrganizationSchema />
         <LocalBusinessSchema />
         <ServiceSchema />
+        <FAQPageSchema />
       </head>
       <body
         className={`${pretendard.variable} antialiased`}
