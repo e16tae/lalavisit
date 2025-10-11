@@ -74,19 +74,21 @@ export function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-3 text-gray-600">
                 <Phone className="w-4 h-4 text-primary flex-shrink-0" />
-                <div>
-                  <div>센터: 02-430-2351</div>
-                  <div className="text-xs text-gray-500">대표자: 010-9573-2351</div>
-                </div>
+                <div>센터: 02-430-2351</div>
+              </li>
+              <li className="flex items-center gap-3 text-gray-600">
+                <Phone className="w-4 h-4 text-primary flex-shrink-0" />
+                <div>팩스: 02-430-2352</div>
+              </li>
+              <li className="flex items-center gap-3 text-gray-600">
+                <Phone className="w-4 h-4 text-primary flex-shrink-0" />
+                <div>대표자: 010-9573-2351</div>
               </li>
               <li className="flex items-center gap-3 text-gray-600">
                 <Mail className="w-4 h-4 text-primary flex-shrink-0" />
                 <a href="mailto:lalavisit@naver.com" className="hover:text-primary transition-colors">
                   lalavisit@naver.com
                 </a>
-              </li>
-              <li className="text-gray-500 text-xs pt-2">
-                팩스: 02-430-2352
               </li>
             </ul>
           </div>
