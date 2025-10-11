@@ -63,7 +63,7 @@ export default function HomePage() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-1"
+                className="border-2 border-primary text-primary rounded-full transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-1"
               >
                 <Link href="/services" className="inline-flex items-center gap-2">
                   서비스 알아보기
