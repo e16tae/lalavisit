@@ -9,7 +9,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: kong
     konghq.com/strip-path: "false"
-    konghq.com/protocols: "https,http"
+    konghq.com/protocols: "https"
     # Optional: Rate limiting plugin
     # konghq.com/plugins: rate-limiting-lalavisit
 spec:
