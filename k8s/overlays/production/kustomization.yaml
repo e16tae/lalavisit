@@ -1,25 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-bases:
+resources:
   - ../../base
-
-namePrefix: prod-
-
-commonLabels:
-  environment: production
-
-replicas:
-  - name: frontend
-    count: 3
-
-images:
-  - name: lalavisit-frontend
-    newName: ghcr.io/e16tae/lalavisit-frontend
-    newTag: latest
-
-patchesStrategicMerge:
-  - resources-patch.yaml
-  - ingress-patch.yaml
-  - deployment-patch.yaml
-  - secrets-patch.yaml
+  - ../../sealed-secrets
