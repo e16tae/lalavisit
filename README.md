@@ -75,3 +75,4 @@ npm start
 - 월 1회 이상 Lighthouse/Pagespeed, Search Console 지표를 검토합니다.
 - 저장소를 새로 공개할 때는 `reset-git-history.sh` 스크립트를 활용해 깔끔한 초기 커밋을 준비할 수 있습니다.
 - 자동화 에이전트 작업은 `agent/<issue-id>-slug` 브랜치에서 수행하고, 사람 검토 후에만 main에 반영합니다.
+- 민감한 환경 변수는 `./scripts/seal-secrets.sh`로 SealedSecret을 생성해 `k8s/sealed-secrets/`에 커밋합니다.
