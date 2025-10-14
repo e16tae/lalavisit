@@ -1,0 +1,45 @@
+# Kong Ingress for Lalavisit
+# Assumes Kong Gateway is already installed in the cluster
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lalavisit-ingress
+  namespace: lalavisit
+  annotations:
+    kubernetes.io/ingress.class: kong
+    konghq.com/strip-path: "false"
+    konghq.com/protocols: "https"
+    konghq.com/https-redirect-status-code: "301"
+    # Optional: Rate limiting plugin
+    # konghq.com/plugins: rate-limiting-lalavisit
+spec:
+  ingressClassName: kong
+  rules:
+    - host: www.lalavisit.com
+      http:
+        paths:
+          # All routes go to frontend (Next.js handles routing)
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 3000
+  tls:
+    - hosts:
+        - www.lalavisit.com
+      secretName: lalavisit-tls  # Create this secret with your TLS certificate
+---
+# Optional: Kong Rate Limiting Plugin
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: rate-limiting-lalavisit
+  namespace: lalavisit
+config:
+  minute: 200
+  hour: 10000
+  policy: local
+plugin: rate-limiting

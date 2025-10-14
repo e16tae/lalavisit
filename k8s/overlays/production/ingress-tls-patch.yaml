@@ -1,0 +1,33 @@
+# Patch to add Cert-Manager annotation for automatic TLS certificate
+# This overrides the base ingress to use Cert-Manager
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lalavisit-ingress
+  namespace: lalavisit
+  annotations:
+    # Cert-Manager annotation for automatic certificate issuance
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    # Kong-specific annotations (from base)
+    kubernetes.io/ingress.class: kong
+    konghq.com/strip-path: "false"
+    konghq.com/protocols: "https,http"
+    konghq.com/plugins: rate-limiting-lalavisit
+spec:
+  ingressClassName: kong
+  rules:
+    - host: www.lalavisit.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 3000
+  tls:
+    - hosts:
+        - www.lalavisit.com
+      secretName: lalavisit-tls  # Cert-Manager will automatically create this
