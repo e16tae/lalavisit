@@ -4,3 +4,10 @@ kind: Kustomization
 resources:
   - ../../base
   - ../../sealed-secrets
+
+patchesStrategicMerge:
+  - deployment-patch.yaml
+  - resources-patch.yaml
+  - ingress-patch.yaml
+  - ingress-tls-patch.yaml
+  - secrets-patch.yaml
