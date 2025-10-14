@@ -104,19 +104,26 @@ ARGOCD_REPO_URL=https://github.com/${GITHUB_ORG}/${GITHUB_REPO}.git
 
 ## 프로덕션 시크릿 관리
 
-### Kubernetes Secrets
-- **SMTP Secret**: 이메일 발송 자격 증명
-    ```bash
-    kubectl create secret generic lalavisit-smtp-secret \
-      --from-literal=email-user='your-email@naver.com' \
-      --from-literal=email-password='your_naver_app_password' \
-      --from-literal=smtp-host='smtp.naver.com' \
-      --from-literal=smtp-port='587' \
-      --from-literal=contact-email='contact@example.com' \
-      --namespace=lalavisit
-    ```
-- **애플리케이션 Secret/ConfigMap**: GA, Kakao 등의 값은 민감도에 따라 Secret 또는 ConfigMap으로 관리합니다.
+### Sealed Secrets 워크플로
+1. 클러스터에 [bitnami-labs/sealed-secrets](https://github.com/bitnami-labs/sealed-secrets) 컨트롤러 설치
+2. 로컬 PC에 `kubeseal` CLI 설치
+3. 프로덕션용 환경 변수 파일 준비 (예: `.env.production`)
+4. 스크립트 실행
+   ```bash
+   ./scripts/seal-secrets.sh \
+     --env-file .env.production \
+     --namespace lalavisit \
+     --name lalavisit-secrets \
+     --out k8s/sealed-secrets/lalavisit-secrets.sealedsecret.yaml
+   ```
+5. 생성된 `k8s/sealed-secrets/*.sealedsecret.yaml` 파일을 커밋 → GitOps 파이프라인으로 배포
+
+`k8s/sealed-secrets/lalavisit-secrets.sealedsecret.yaml.example` 파일은 구조를 참고하기 위한 템플릿입니다. 실제 배포 시에는 `encryptedData` 값을 `kubeseal`이 생성한 값으로 교체해야 합니다.
+
+### 기타 Secrets
 - **TLS Secret**: `kubectl create secret tls lalavisit-tls ...` 또는 cert-manager `Certificate` 리소스를 사용합니다.
+- **GHCR Pull Secret**: 개인 레지스트리를 사용하는 경우 `kubectl create secret docker-registry ghcr-secret ...`.
+- (선택) 외부 서비스 토큰은 별도 SealedSecret 또는 External Secrets Operator 연동으로 관리합니다.
 
 ### GitHub Secrets (CI/CD)
 - `GHCR_PAT` 또는 `GITHUB_TOKEN`: 컨테이너 레지스트리 푸시 권한
@@ -145,4 +152,3 @@ ARGOCD_REPO_URL=https://github.com/${GITHUB_ORG}/${GITHUB_REPO}.git
 - **SMTP 인증 실패**: 앱 비밀번호를 다시 생성하거나 포트/TLS 설정을 확인합니다.
 - **구성 값 누락**: 빌드 시 오류가 발생하면 `.env.example`과 비교하여 누락된 변수를 채웁니다.
 - **구조화된 데이터 오류**: `npm run build` 후 `npm run start`로 프로덕션 빌드를 확인하며 콘솔 로그를 검토합니다.
-

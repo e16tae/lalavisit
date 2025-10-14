@@ -18,7 +18,9 @@ Kong Ingress → https://www.example.com
 
 1. **레지스트리 권한**: GitHub Repository → Settings → Actions → General → Workflow permissions에서 *Read and write permissions* 활성화
 2. **Kubernetes 클러스터**: 1.25 이상, Kong Ingress Controller 설치, cert-manager(Optional) 설치
-3. **Secrets 구성**: [환경 구성 문서](./environment.md) 참고. SMTP/TLS Secret, GitHub Secrets, ArgoCD 토큰 필요
+3. **Secrets 구성**: [환경 구성 문서](./environment.md) 참고.  
+   - `kubeseal` 설치 후 `./scripts/seal-secrets.sh` 실행 → `k8s/sealed-secrets/*.sealedsecret.yaml` 생성 및 커밋  
+   - TLS Secret, GitHub Secrets(`GH_PAT`, `ARGOCD_*`) 준비
 4. **도메인 DNS**: `www` / apex 레코드가 Ingress Controller로 향하도록 설정
 
 ## 워크플로 요약
@@ -135,4 +137,3 @@ kubectl set image deployment/lalavisit-frontend frontend=ghcr.io/YOUR_GITHUB_USE
 ```
 
 > 수동 배포는 GitOps 흐름과 충돌할 수 있으므로, 사용 후에는 ArgoCD 상태를 반드시 `Sync` 시켜야 합니다.
-
