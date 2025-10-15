@@ -28,6 +28,29 @@ export function ActivitiesClient() {
         </div>
       </section>
 
+      {/* Intro Section */}
+      <section className="py-12 bg-gray-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto space-y-4 text-gray-700 leading-relaxed">
+            <p>
+              라라재가방문요양센터는 어르신의 안전한 일상과 요양보호사의 전문성을 동시에 강화하기 위해
+              정기적인 현장 활동과 교육 프로그램을 운영합니다. 방문요양 서비스는 가정 내 신체활동 지원,
+              인지 자극 프로그램, 정서 교감 시간을 중심으로 진행되며, 필요 시 의료기관 방문 동행과
+              재활 운동도 함께 이뤄집니다.
+            </p>
+            <p>
+              내부 교육은 장기요양보험 제도 변화, 감염병 예방, 치매 이해, 응급 대응 등 실무 중심 커리큘럼으로 구성됩니다.
+              특히 요양기관찾기 등록기관으로서 국민건강보험공단의 지침을 준수하고 있으며,
+              보호자와 어르신의 피드백을 반영해 교육 콘텐츠를 수시로 개편하고 있습니다.
+            </p>
+            <p>
+              아래 갤러리에는 최근 진행한 프로그램의 사진과 간단한 설명이 순차적으로 공개됩니다.
+              새로운 활동 기록은 월 단위로 업데이트하니 자주 방문해 주세요.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Gallery with Tabs */}
       <section className="py-12 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
