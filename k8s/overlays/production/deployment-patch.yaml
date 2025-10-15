@@ -9,4 +9,4 @@ spec:
       annotations:
         # This annotation triggers rolling update when changed by CI/CD
         # Updated automatically by GitHub Actions on each deployment
-        deployment.kubernetes.io/revision: "3e21777c66c19fbe6efb6540a6ac800dd0d9b775-2025-10-15T02:19:28Z"
+        deployment.kubernetes.io/revision: "5351a7c29331dbae81d6d1d4ad8701f7949d9311-2025-10-15T02:45:55Z"
