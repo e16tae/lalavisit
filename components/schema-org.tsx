@@ -1,9 +1,23 @@
+import reviewsData from "@/data/reviews.json";
+
+type ReviewEntry = {
+  id: number;
+  name: string;
+  service: string;
+  grade: string;
+  rating: number;
+  comment: string;
+  date: string;
+};
+
+const reviews = (reviewsData as { reviews: ReviewEntry[] }).reviews || [];
+
 export function WebSiteSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": "https://www.lalavisit.com/#website",
-    name: "라라재가방문요양센터",
+    name: "요양기관찾기 라라재가방문요양센터",
     alternateName: [
       "라라재가방문요양센터",
       "라라",
@@ -33,13 +47,14 @@ export function WebSiteSchema() {
       "가락동 재가요양",
       "송파 요양센터",
       "가락동 요양센터",
+      "요양기관찾기 라라재가방문요양센터",
       "가족요양",
       "입주간병",
       "노인요양",
       "장기요양"
     ],
     url: "https://www.lalavisit.com",
-    description: "믿을 수 있는 방문요양, 가족요양, 입주간병 서비스를 제공하는 전문 요양센터",
+    description: "요양기관찾기에 등록된 방문요양, 가족요양, 입주간병 전문 요양센터",
     inLanguage: "ko-KR",
     publisher: {
       "@id": "https://www.lalavisit.com/#organization"
@@ -55,13 +70,18 @@ export function WebSiteSchema() {
 }
 
 export function LocalBusinessSchema() {
-  const schema = {
+  const totalRatings = reviews.reduce((sum, review) => sum + review.rating, 0);
+  const reviewCount = reviews.length;
+  const averageRating = reviewCount > 0 ? Math.round((totalRatings / reviewCount) * 10) / 10 : undefined;
+
+  const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
-    "@type": ["LocalBusiness", "HealthAndBeautyBusiness"],
+    "@type": ["LocalBusiness", "MedicalOrganization", "HomeHealthCare"],
     "@id": "https://www.lalavisit.com/#organization",
     name: "라라재가방문요양센터",
-    alternateName: "라라재가",
+    alternateName: ["라라재가", "요양기관찾기 라라재가방문요양센터"],
     legalName: "라라재가방문요양센터",
+    slogan: "국민건강보험공단 요양기관찾기 등록 재가방문요양센터",
     image: "https://www.lalavisit.com/logo.svg",
     logo: {
       "@type": "ImageObject",
@@ -69,8 +89,14 @@ export function LocalBusinessSchema() {
       width: 200,
       height: 200
     },
-    description: "믿을 수 있는 방문요양, 가족요양, 입주간병 서비스를 제공하는 전문 요양센터. 장기요양등급 1~5등급, 인지지원등급 어르신을 위한 전문 케어 서비스를 제공합니다.",
+    description:
+      "요양기관찾기 등록 방문요양, 가족요양, 입주간병 전문 요양센터. 장기요양등급 1~5등급, 인지지원등급 어르신을 위한 전문 케어 서비스를 제공합니다.",
     url: "https://www.lalavisit.com",
+    sameAs: [
+      "https://www.lalavisit.com",
+      "https://map.naver.com/p/entry/place/2004738980",
+      "https://pf.kakao.com/_xnxoxoxG"
+    ],
     telephone: "+82-2-430-2351",
     faxNumber: "+82-2-430-2352",
     email: "lalavisit@naver.com",
@@ -87,6 +113,7 @@ export function LocalBusinessSchema() {
       latitude: 37.4925,
       longitude: 127.1202
     },
+    hasMap: "https://map.naver.com/p/entry/place/2004738980",
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: [
@@ -137,8 +164,41 @@ export function LocalBusinessSchema() {
         name: "고유번호",
         value: "530-80-03437"
       }
+    ],
+    knowsAbout: [
+      "요양기관찾기",
+      "서울 송파구 방문요양",
+      "장기요양보험 재가요양 서비스"
     ]
   };
+
+  if (averageRating) {
+    schema.aggregateRating = {
+      "@type": "AggregateRating",
+      ratingValue: averageRating,
+      ratingCount: reviewCount,
+      reviewCount,
+      bestRating: 5,
+      worstRating: 1
+    };
+
+    schema.review = reviews.slice(0, 6).map((review) => ({
+      "@type": "Review",
+      name: `${review.service} 이용 후기`,
+      reviewBody: review.comment,
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: review.rating,
+        bestRating: 5,
+        worstRating: 1
+      },
+      author: {
+        "@type": "Person",
+        name: review.name
+      },
+      datePublished: review.date
+    }));
+  }
 
   return (
     <script
