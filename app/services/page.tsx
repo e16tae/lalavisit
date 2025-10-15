@@ -1,18 +1,19 @@
 import { Heart, Users, Home, Check, DollarSign, ShoppingCart, FileText } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { BreadcrumbSchema } from "@/components/schema-org";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 
 export const metadata: Metadata = {
   title: "서비스 안내 - 라라재가방문요양센터",
-  description: "방문요양, 가족요양, 입주간병 서비스 안내. 2025년 장기요양 수가 정보, 노인장기요양보험 신청 방법, 복지용구 대여 및 구입 안내",
-  keywords: "방문요양서비스, 가족요양비용, 입주간병비용, 장기요양수가, 노인장기요양보험, 복지용구, 요양보호사자격증",
+  description:
+    "요양기관찾기 등록 라라재가방문요양센터의 방문요양·가족요양·입주간병 서비스 안내. 2025년 장기요양 수가, 노인장기요양보험 신청 방법, 복지용구 대여 및 구입 정보",
+  keywords: "요양기관찾기, 방문요양서비스, 가족요양비용, 입주간병비용, 장기요양수가, 노인장기요양보험, 복지용구, 요양보호사자격증",
   openGraph: {
     type: "website",
     locale: "ko_KR",
     url: "https://www.lalavisit.com/services",
     title: "서비스 안내 - 라라재가방문요양센터",
-    description: "전문적이고 체계적인 요양 서비스 제공. 방문요양, 가족요양, 입주간병, 장기요양보험 안내",
+    description: "요양기관찾기 등록 라라재가방문요양센터의 방문요양, 가족요양, 입주간병, 장기요양보험 안내",
     siteName: "라라재가방문요양센터",
   },
   alternates: {
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <>
-      <BreadcrumbSchema
+      <Breadcrumbs
         items={[
           { name: "홈", url: "https://www.lalavisit.com" },
           { name: "서비스 안내", url: "https://www.lalavisit.com/services" },

@@ -15,19 +15,32 @@ const pretendard = localFont({
 import { Navigation } from "@/components/navigation";
 import { FloatingContact } from "@/components/floating-contact";
 import { Footer } from "@/components/footer";
-import { WebSiteSchema, LocalBusinessSchema, ServiceSchema, OrganizationSchema, FAQPageSchema } from "@/components/schema-org";
+import { WebSiteSchema, LocalBusinessSchema, ServiceSchema, OrganizationSchema } from "@/components/schema-org";
 import { SkipToContent } from "@/components/skip-to-content";
 import { Toaster } from "@/components/ui/sonner";
 import { WebVitals } from "@/components/web-vitals";
 
+const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+const naverVerification = process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION;
+
+const verification: Metadata["verification"] = {};
+
+if (googleVerification) {
+  verification.google = googleVerification;
+}
+
+if (naverVerification) {
+  verification.other = { "naver-site-verification": naverVerification };
+}
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.lalavisit.com"),
   title: {
-    default: "라라재가방문요양센터 - 믿을 수 있는 전문 요양 서비스",
+    default: "라라재가방문요양센터 | 요양기관찾기 공식 홈페이지",
     template: "%s | 라라재가방문요양센터",
   },
-  description: "서울 송파구 가락동 위치. 방문요양, 가족요양, 입주간병 서비스 제공. 장기요양등급 1~5등급, 인지지원등급 어르신을 위한 전문 케어. 02-430-2351",
-  keywords: ["방문요양", "가족요양", "입주간병", "요양보호사", "재가요양", "송파구요양", "가락동요양", "장기요양보험", "노인요양", "요양서비스"],
+  description: "요양기관찾기 등록 라라재가방문요양센터. 서울 송파구 가락동 주소, 방문요양·가족요양·입주간병 전문 서비스, 02-430-2351",
+  keywords: ["요양기관찾기", "방문요양", "가족요양", "입주간병", "요양보호사", "재가요양", "송파구요양", "가락동요양", "장기요양보험", "노인요양", "요양서비스"],
   authors: [{ name: "라라재가방문요양센터" }],
   creator: "라라재가방문요양센터",
   publisher: "라라재가방문요양센터",
@@ -35,14 +48,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ko_KR",
     url: "https://www.lalavisit.com",
-    title: "라라재가방문요양센터 - 믿을 수 있는 전문 요양 서비스",
-    description: "사랑과 정성으로 어르신들의 건강한 일상을 함께합니다. 방문요양, 가족요양, 입주간병 전문 센터",
+    title: "라라재가방문요양센터 | 요양기관찾기 공식 홈페이지",
+    description: "요양기관찾기 등록 라라재가방문요양센터. 사랑과 정성으로 어르신들의 건강한 일상을 함께합니다.",
     siteName: "라라재가방문요양센터",
   },
   twitter: {
     card: "summary_large_image",
-    title: "라라재가방문요양센터 - 믿을 수 있는 전문 요양 서비스",
-    description: "사랑과 정성으로 어르신들의 건강한 일상을 함께합니다.",
+    title: "라라재가방문요양센터 | 요양기관찾기 공식 홈페이지",
+    description: "요양기관찾기 등록 라라재가방문요양센터. 사랑과 정성으로 어르신들의 건강한 일상을 함께합니다.",
   },
   robots: {
     index: true,
@@ -63,12 +76,7 @@ export const metadata: Metadata = {
       { url: '/apple-icon.svg', type: 'image/svg+xml' },
     ],
   },
-  verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
-    other: {
-      "naver-site-verification": process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION || "",
-    },
-  },
+  ...(verification.google || verification.other ? { verification } : {}),
 };
 
 export default function RootLayout({
@@ -79,11 +87,17 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
+        <meta name="subject" content="요양기관찾기 라라재가방문요양센터" />
+        <meta name="classification" content="국민건강보험공단 요양기관찾기 등록 재가방문요양센터" />
+        <meta name="url" content="https://www.lalavisit.com" />
+        <meta name="identifier-URL" content="https://www.lalavisit.com" />
+        <meta name="geo.position" content="37.4925;127.1202" />
+        <meta name="geo.placename" content="서울특별시 송파구 가락동 303호" />
+        <meta name="geo.region" content="KR-11" />
         <WebSiteSchema />
         <OrganizationSchema />
         <LocalBusinessSchema />
         <ServiceSchema />
-        <FAQPageSchema />
       </head>
       <body
         className={`${pretendard.variable} antialiased`}
