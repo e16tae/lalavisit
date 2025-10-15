@@ -49,22 +49,6 @@ export default function HomePage() {
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
                 사랑과 정성으로 어르신들의 건강한 일상을 함께합니다
               </p>
-              <p className="text-base text-gray-600 max-w-2xl mx-auto">
-                국민건강보험공단 <span className="font-semibold text-primary">요양기관찾기</span> 등록기관 · 주소: 서울특별시 송파구 송파대로24길 5-14, 3층 303호 (가락동)
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 items-center justify-center text-sm text-gray-500">
-                <a
-                  href="https://www.longtermcare.or.kr/npbs/jsp/inf/npe/infNpeAgencyList.jsp"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-primary/20 px-4 py-2 text-primary hover:bg-primary/10 transition-colors"
-                >
-                  요양기관찾기에서 라라재가방문요양센터 확인하기
-                </a>
-                <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-4 py-2">
-                  <span className="font-medium text-gray-700">공식 홈페이지</span> www.lalavisit.com
-                </span>
-              </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center animate-scale-in">
               <Button
